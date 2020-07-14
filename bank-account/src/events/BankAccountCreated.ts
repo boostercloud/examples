@@ -1,6 +1,7 @@
 import { UUID } from '@boostercloud/framework-types'
+import { Event } from '@boostercloud/framework-core'
 
-// @Event
+@Event
 export class BankAccountCreated {
   public constructor(readonly owner: UUID, readonly iban: UUID) {}
 

@@ -1,9 +1,11 @@
 import { Register, UUID } from '@boostercloud/framework-types'
 import { BankAccountCreated } from '../events/BankAccountCreated'
+import { Command } from '@boostercloud/framework-core/dist'
+import { Banker } from '../Roles'
 
-// @Command({
-//   authorize: [Banker],
-// })
+@Command({
+  authorize: [Banker],
+})
 export class CreateBankAccount {
   public constructor(readonly owner: UUID) {}
 
