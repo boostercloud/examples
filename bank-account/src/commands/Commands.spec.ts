@@ -28,4 +28,21 @@ describe('Commands', () => {
       })
     })
   })
+  describe('Deposit', () => {
+    const anyAmount = 10.0
+    const anyIban = UUID.generate()
+    describe('handle', () => {
+      it('should register the DepositPerformed event', async () => {
+        await new Deposit(anyIban, anyAmount).handle(register)
+
+        assert.calledOnceWithExactly(
+          register.events,
+          match({
+            iban: anyIban,
+            amount: anyAmount,
+          })
+        )
+      })
+    })
+  })
 })

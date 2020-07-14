@@ -4,3 +4,8 @@ import { Role } from '@boostercloud/framework-core/dist'
   allowSelfSignUp: false,
 })
 export class Banker {}
+
+@Role({
+  allowSelfSignUp: false,
+})
+export class Client {}
