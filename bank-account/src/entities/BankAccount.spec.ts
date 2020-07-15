@@ -22,4 +22,20 @@ describe('BankAccount', () => {
       })
     })
   })
+
+  describe('reduceDepositPerformed', () => {
+    it('should increase the account balance in the given deposit amount', () => {
+      const givenAmount = 10.0
+      const someDeposit = new DepositPerformed(givenIban, givenAmount)
+      const accountWithBalanceZero = new BankAccount(givenIban, givenOwner, 10.0)
+
+      const result = BankAccount.reduceDepositPerformed(someDeposit, accountWithBalanceZero)
+
+      assert.deepEqual(result, {
+        id: accountWithBalanceZero.id,
+        owner: accountWithBalanceZero.owner,
+        balance: 20.0,
+      })
+    })
+  })
 })

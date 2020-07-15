@@ -13,4 +13,13 @@ export class BankAccount {
   public static reduceBankAccountCreated(event: BankAccountCreated, _currentBankAccount?: BankAccount): BankAccount {
     return new BankAccount(event.iban, event.owner, NEW_ACCOUNT_BALANCE)
   }
+
+  @Reduces(DepositPerformed)
+  public static reduceDepositPerformed(event: DepositPerformed, currentBankAccount?: BankAccount): BankAccount {
+    if (!currentBankAccount) {
+      throw Error('Should not happen: Attempting to deposit into an unexistent account')
+    }
+    const newBalance = currentBankAccount.balance + event.amount
+    return new BankAccount(currentBankAccount.id, currentBankAccount.owner, newBalance)
+  }
 }
