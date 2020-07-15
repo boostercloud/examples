@@ -1,8 +1,8 @@
 import { assert } from 'chai'
-import { BankAccount } from './BankAccount'
-import { BankAccountCreated } from '../events/BankAccountCreated'
+import { BankAccount } from '../src/entities/BankAccount'
+import { BankAccountCreated } from '../src/events/BankAccountCreated'
 import { UUID } from '@boostercloud/framework-types/dist'
-import { DepositPerformed } from '../events/DepositPerformed'
+import { DepositPerformed } from '../src/events/DepositPerformed'
 
 describe('BankAccount', () => {
   const givenOwner = UUID.generate()

@@ -1,8 +1,7 @@
-import { CreateBankAccount } from './CreateBankAccount'
+import { CreateBankAccount } from '../src/commands/CreateBankAccount'
 import { Register, UUID } from '@boostercloud/framework-types'
 import { assert, createStubInstance, match, SinonStubbedInstance } from 'sinon'
-import { Deposit } from './Deposit'
-// Will keep the tests for the commands in just one file because they are short and simple
+import { Deposit } from '../src/commands/Deposit'
 
 describe('Commands', () => {
   let register: SinonStubbedInstance<Register>
