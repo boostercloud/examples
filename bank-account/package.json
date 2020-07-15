@@ -42,7 +42,8 @@
     "compile": "tsc -b tsconfig.json",
     "deploy": "boost deploy",
     "clean": "rimraf ./dist tsconfig.tsbuildinfo",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.spec.ts\"",
+    "build": "npm run clean && npm run compile && npm run test"
   },
   "types": "lib/index.d.ts"
 }
