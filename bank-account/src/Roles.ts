@@ -1,4 +1,4 @@
-import { Role } from '@boostercloud/framework-core/dist'
+import { Role } from '@boostercloud/framework-core'
 
 @Role({
   allowSelfSignUp: false,

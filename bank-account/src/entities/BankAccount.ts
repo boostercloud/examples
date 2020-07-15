@@ -1,7 +1,7 @@
 import { Entity, Reduces } from '@boostercloud/framework-core'
 import { BankAccountCreated } from '../events/BankAccountCreated'
 import { DepositPerformed } from '../events/DepositPerformed'
-import { UUID } from '@boostercloud/framework-types/dist'
+import { UUID } from '@boostercloud/framework-types'
 
 const NEW_ACCOUNT_BALANCE = 0.0
 

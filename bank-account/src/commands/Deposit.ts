@@ -1,6 +1,6 @@
-import { Register, UUID } from '@boostercloud/framework-types/dist'
+import { Register, UUID } from '@boostercloud/framework-types'
 import { DepositPerformed } from '../events/DepositPerformed'
-import { Command } from '@boostercloud/framework-core/dist'
+import { Command } from '@boostercloud/framework-core'
 import { Client } from '../Roles'
 
 @Command({
