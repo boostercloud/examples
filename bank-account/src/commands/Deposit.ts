@@ -1,10 +1,10 @@
 import { Register, UUID } from '@boostercloud/framework-types'
 import { DepositPerformed } from '../events/DepositPerformed'
 import { Command } from '@boostercloud/framework-core'
-import { Client } from '../Roles'
+import { Banker, Client } from '../Roles'
 
 @Command({
-  authorize: [Client],
+  authorize: [Client, Banker],
 })
 export class Deposit {
   constructor(readonly iban: UUID, readonly amount: number) {}
