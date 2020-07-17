@@ -7,10 +7,10 @@ import { Banker, Client } from '../Roles'
   authorize: [Client, Banker],
 })
 export class AccountReadModel {
-  public constructor(public id: UUID, readonly owner: UUID, readonly balance: number) {}
+  public constructor(public id: UUID, readonly iban: UUID, readonly balance: number) {}
 
-  @Projects(BankAccount, 'id')
+  @Projects(BankAccount, 'owner')
   public static projectBankAccount(entity: BankAccount, _currentAccountReadModel?: AccountReadModel): AccountReadModel {
-    return new AccountReadModel(entity.id, entity.owner, entity.balance)
+    return new AccountReadModel(entity.owner, entity.id, entity.balance)
   }
 }
