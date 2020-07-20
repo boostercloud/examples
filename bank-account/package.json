@@ -50,9 +50,10 @@
     "lint:check": "eslint --ext '.js,.ts' **/*.ts",
     "lint:fix": "eslint --quiet --fix --ext '.js,.ts' **/*.ts",
     "compile": "tsc -b tsconfig.json",
-    "deploy": "boost deploy",
+    "deploy": "boost deploy -e ${BOOSTER_ENV}",
     "clean": "rimraf ./dist tsconfig.tsbuildinfo",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.spec.ts\"",
+    "test": "BOOSTER_ENV=development nyc --extension .ts mocha",
+    "test-integration": "BOOSTER_ENV=integration AWS_REGION=eu-west-1 mocha --config .mocharc-integration.json",
     "build": "npm run clean && npm run compile && npm run test"
   },
   "types": "lib/index.d.ts"

@@ -34,7 +34,7 @@ export async function sleep(ms: number): Promise<void> {
 // --- Stack Helpers ---
 
 function appStackName(): string {
-  return `my-store-${process.env.BOOSTER_APP_SUFFIX}-app`
+  return 'boosted-bank-account-app'
 }
 
 export async function appStack(): Promise<Stack> {
