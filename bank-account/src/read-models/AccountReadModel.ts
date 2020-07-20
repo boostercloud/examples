@@ -1,10 +1,10 @@
 import { Projects, ReadModel } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
 import { BankAccount } from '../entities/BankAccount'
-import { Banker, Client } from '../Roles'
+import { BankTeller, Client } from '../Roles'
 
 @ReadModel({
-  authorize: [Client, Banker],
+  authorize: [Client, BankTeller],
 })
 export class AccountReadModel {
   public constructor(public id: UUID, readonly iban: UUID, readonly balance: number) {}
