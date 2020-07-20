@@ -8,4 +8,4 @@ export class BankTeller {}
 @Role({
   allowSelfSignUp: true,
 })
-export class Client {}
+export class Customer {}
