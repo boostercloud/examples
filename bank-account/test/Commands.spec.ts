@@ -2,6 +2,7 @@ import { CreateBankAccount } from '../src/commands/CreateBankAccount'
 import { Register, UUID } from '@boostercloud/framework-types'
 import { assert, createStubInstance, match, SinonStubbedInstance } from 'sinon'
 import { Deposit } from '../src/commands/Deposit'
+import { Withdraw } from '../src/commands/Withdraw'
 
 describe('Commands', () => {
   let register: SinonStubbedInstance<Register>
@@ -33,6 +34,23 @@ describe('Commands', () => {
     describe('handle', () => {
       it('should register the DepositPerformed event', async () => {
         await new Deposit(anyIban, anyAmount).handle(register)
+
+        assert.calledOnceWithExactly(
+          register.events,
+          match({
+            iban: anyIban,
+            amount: anyAmount,
+          })
+        )
+      })
+    })
+  })
+  describe('Withdraw', () => {
+    const anyAmount = 10.0
+    const anyIban = UUID.generate()
+    describe('handle', () => {
+      it('should register the WithdrawPerformed event', async () => {
+        await new Withdraw(anyIban, anyAmount).handle(register)
 
         assert.calledOnceWithExactly(
           register.events,
