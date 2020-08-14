@@ -1,9 +1,6 @@
-// TODO: LINK ARTICLES HERE
-
-
 # Simply chat server powered by Booster Framework
 
-This project is a sample implementation of a chat server in [Booster](https://booster.cloud) to serve as a guidance of the main concepts and artifacts used in the framework.
+This project is a sample implementation of a chat server in [Booster](https://booster.cloud) to serve as an example for the [Booster framework vs Ruby on Rails](https://dev.to/theagilemonkeys/booster-framework-vs-ruby-on-rails-1f48) article.
 
 ## Chat requirements
 
