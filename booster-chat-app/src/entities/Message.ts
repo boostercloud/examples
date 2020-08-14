@@ -1,3 +1,4 @@
+import { Entity } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
 import { UserProfile } from './UserProfile'
 
@@ -6,6 +7,7 @@ export enum MessageType {
   JOIN = 'join',
 }
 
+@Entity
 export class Message {
   public constructor(
     public id: UUID,

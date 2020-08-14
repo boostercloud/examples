@@ -1,10 +1,13 @@
+// TODO: LINK ARTICLES HERE
+
+
 # Simply chat server powered by Booster Framework
 
 This project is a sample implementation of a chat server in [Booster](https://booster.cloud) to serve as a guidance of the main concepts and artifacts used in the framework.
 
 ## Chat requirements
 
-We are going to structure our chat app in chat rooms, which are going to be created or modified only by admins. Inside each chat room the user sends messages to chat with other users.
+We are going to structure our chat app in chat rooms, which are going to be created by admins and users, and modified only by admins. Inside each chat room the user sends messages to chat with other users.
 
 A chat room might be private, that means we need to request the owner access to it. If the chat room is public everyone could join in and post messages.
 

@@ -18,7 +18,7 @@ export class MessageReadModel {
     readonly createdBy: UserProfile
   ) {}
 
-  @Projects(Message, 'chatRoomId')
+  @Projects(Message, 'id')
   public static onMessageCreated(message: Message): MessageReadModel {
     return new MessageReadModel(
       message.id,
