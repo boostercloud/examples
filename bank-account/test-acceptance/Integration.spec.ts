@@ -27,6 +27,20 @@ describe('Acceptance tests', async () => {
       `,
     }
   }
+  const deposit = (accountID: UUID, amount: number): MutationOptions => {
+    return {
+      mutation: gql`
+          mutation{
+              Deposit(
+                  input: {
+                      iban: "${accountID}"
+                      amount: "${amount}"
+                  }
+              )
+          }
+      `,
+    }
+  }
 
   before(async () => {
     try {
@@ -54,7 +68,7 @@ describe('Acceptance tests', async () => {
 
       expect(result).to.be.deep.equal({ data: { CreateBankAccount: true } })
     })
-    it('fails when submitted by customers', async () => {
+    it('fails when submitted by a Customer', async () => {
       const result = customerClient.mutate(createBankAccount(customerId))
 
       await expect(result).to.eventually.be.rejectedWith("Access denied for command 'CreateBankAccount'")
@@ -69,8 +83,13 @@ describe('Acceptance tests', async () => {
   })
 
   context('Deposit', () => {
-    it.skip('success when submitted by bankers')
-    it.skip('success when submitted by clients')
+    it('success when submitted by a BankTeller', async () => {
+      const amount = 10000
+      const result = await bankTellerClient.mutate(deposit(accountId, amount))
+
+      expect(result).to.be.deep.equal({ data: { Deposit: true } })
+    })
+    it.skip('success when submitted by a Customer')
     it.skip('fails when submitted without token')
   })
 })
