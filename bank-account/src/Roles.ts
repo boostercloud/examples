@@ -3,9 +3,9 @@ import { Role } from '@boostercloud/framework-core'
 @Role({
   allowSelfSignUp: true,
 })
-export class Banker {}
+export class BankTeller {}
 
 @Role({
   allowSelfSignUp: true,
 })
-export class Client {}
+export class Customer {}

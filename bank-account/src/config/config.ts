@@ -3,6 +3,6 @@ import { BoosterConfig } from '@boostercloud/framework-types'
 import { Provider } from '@boostercloud/framework-provider-aws'
 
 Booster.configure('production', (config: BoosterConfig): void => {
-  config.appName = 'booster-bank-account'
+  config.appName = 'boosted-bank-account'
   config.provider = Provider
 })

@@ -2,9 +2,10 @@
   "extension": [
     "ts"
   ],
-  "spec": "test/**/*.spec.ts",
+  "spec": "test-integration/**/*.spec.ts",
   "require": "ts-node/register",
+  "timeout": "10s",
   "colors": true,
   "diff": true,
-  "reporter": "dot"
+  "reporter": "spec"
 }
