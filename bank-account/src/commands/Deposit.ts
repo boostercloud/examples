@@ -1,15 +1,15 @@
-import { Register, UUID } from '@boostercloud/framework-types'
-import { DepositPerformed } from '../events/DepositPerformed'
 import { Command } from '@boostercloud/framework-core'
-import { BankTeller, Customer } from '../Roles'
+import { Register } from '@boostercloud/framework-types'
+import { BankTeller, Customer } from '../roles'
+import { DepositPerformed } from '../events/deposit-performed'
 
 @Command({
   authorize: [Customer, BankTeller],
 })
 export class Deposit {
-  constructor(readonly iban: UUID, readonly amount: number) {}
+  public constructor(readonly iban: string, readonly amount: number) {}
 
-  public async handle(register: Register): Promise<void> {
-    register.events(new DepositPerformed(this.iban, this.amount))
+  public static async handle(command: Deposit, register: Register): Promise<void> {
+    register.events(new DepositPerformed(command.iban, command.amount))
   }
 }

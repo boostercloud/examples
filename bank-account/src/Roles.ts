@@ -1,11 +1,15 @@
 import { Role } from '@boostercloud/framework-core'
 
 @Role({
-  allowSelfSignUp: true,
+  auth: {
+    signUpMethods: ['email'],
+  },
 })
 export class BankTeller {}
 
 @Role({
-  allowSelfSignUp: true,
+  auth: {
+    signUpMethods: ['phone'],
+  },
 })
 export class Customer {}
