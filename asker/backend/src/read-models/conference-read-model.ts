@@ -32,7 +32,7 @@ export class ConferenceReadModel {
     const newAndSortedQuestions = currentConferenceReadModel.questions
       .filter(doesNotHaveId(entity.id)) // Remove the question if it was present
       .concat(entity) // Add the new question or the existing, removed, question with the latest information
-      .sort(byLikes)
+      .sort(byClaps)
     return new ConferenceReadModel(
       currentConferenceReadModel.id,
       currentConferenceReadModel.location,
@@ -45,6 +45,6 @@ function doesNotHaveId(id: UUID): (question: Question) => boolean {
   return (question) => question.id != id
 }
 
-function byLikes(questionA: Question, questionB: Question): number {
-  return questionB.likes - questionA.likes
+function byClaps(questionA: Question, questionB: Question): number {
+  return questionB.claps - questionA.claps
 }
