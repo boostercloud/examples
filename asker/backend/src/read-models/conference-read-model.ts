@@ -7,7 +7,7 @@ import { Question } from '../entities/question'
   authorize: 'all',
 })
 export class ConferenceReadModel {
-  public constructor(public id: UUID, readonly name: string, readonly questions: Array<Question>) {}
+  public constructor(public id: UUID, readonly location: string, readonly questions: Array<Question>) {}
 
   @Projects(Conference, 'id')
   public static projectConference(
@@ -15,9 +15,9 @@ export class ConferenceReadModel {
     currentConferenceReadModel?: ConferenceReadModel
   ): ProjectionResult<ConferenceReadModel> {
     if (!currentConferenceReadModel) {
-      currentConferenceReadModel = new ConferenceReadModel(entity.id, entity.name, [])
+      currentConferenceReadModel = new ConferenceReadModel(entity.id, entity.location, [])
     }
-    return new ConferenceReadModel(currentConferenceReadModel.id, entity.name, currentConferenceReadModel.questions)
+    return new ConferenceReadModel(currentConferenceReadModel.id, entity.location, currentConferenceReadModel.questions)
   }
 
   @Projects(Question, 'conferenceId')
@@ -26,16 +26,23 @@ export class ConferenceReadModel {
     currentConferenceReadModel?: ConferenceReadModel
   ): ProjectionResult<ConferenceReadModel> {
     if (!currentConferenceReadModel) {
-      throw 'Someone asked a question in a non-existent Conference 😳. Who asked it 😒?'
+      throw new Error('Someone asked a question in a non-existent Conference 😳. Who asked it 😒?')
     }
 
-    const newAndSortedQuestions = currentConferenceReadModel.questions.concat(entity).sort(byLikes)
+    const newAndSortedQuestions = currentConferenceReadModel.questions
+      .filter(doesNotHaveId(entity.id)) // Remove the question if it was present
+      .concat(entity) // Add the new question or the existing, removed, question with the latest information
+      .sort(byLikes)
     return new ConferenceReadModel(
       currentConferenceReadModel.id,
-      currentConferenceReadModel.name,
+      currentConferenceReadModel.location,
       newAndSortedQuestions
     )
   }
+}
+
+function doesNotHaveId(id: UUID): (question: Question) => boolean {
+  return (question) => question.id != id
 }
 
 function byLikes(questionA: Question, questionB: Question): number {
