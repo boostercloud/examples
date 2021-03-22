@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "author": "Booster Cloud",
   "dependencies": {
-    "@boostercloud/framework-core": "^0.12.2",
+    "@boostercloud/framework-core": "^0.12.3",
     "@boostercloud/framework-provider-aws": "*",
-    "@boostercloud/framework-types": "^0.12.2"
+    "@boostercloud/framework-types": "^0.12.3"
   },
   "devDependencies": {
     "@boostercloud/framework-provider-aws-infrastructure": "*",
