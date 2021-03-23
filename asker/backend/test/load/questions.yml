@@ -1,0 +1,24 @@
+config:
+  target: "https://126yqev8d2.execute-api.eu-west-1.amazonaws.com/on-aws/graphql"
+  phases:
+    - duration: 5
+      arrivalRate: 20
+      name: Small number of questions
+  variables:
+    conferenceId: load_test
+
+scenarios:
+  # We define one scenario:
+  - name: "Ask questions"
+    flow:
+      - post:
+          url: "/"
+          body: '{
+            "query":"mutation {
+              Ask(input: {
+                conference:\"{{conferenceId}}\"
+                question:\"What''s inside yellow holes?\"
+                who:\"alvaro@booster.cloud\"
+              })
+            }"
+          }'
