@@ -13,7 +13,7 @@ export class Clap {
     if (!command.byWhom) {
       throw new Error('Please tell us who is clapping the question. Field "byWhom" is empty')
     }
-    const question = Booster.fetchEntitySnapshot(Question, command.questionId)
+    const question = Booster.entity(Question, command.questionId)
     if (!question) {
       throw new Error(
         `You are trying to clap a question that doesn't exist 🤔. Question with id ${command.questionId} not found`

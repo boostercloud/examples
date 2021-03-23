@@ -1,7 +1,7 @@
 import { Booster, Command } from '@boostercloud/framework-core'
 import { Register, UUID } from '@boostercloud/framework-types'
 import { Conference } from '../entities/conference'
-import {QuestionAsked} from '../events/question-asked'
+import { QuestionAsked } from '../events/question-asked'
 
 @Command({
   authorize: 'all',
@@ -16,7 +16,7 @@ export class Ask {
     if (!command.question) {
       throw new Error('Did you submit an empty question 🤨. Field "question" is empty')
     }
-    const conference = await Booster.fetchEntitySnapshot(Conference, command.conference)
+    const conference = await Booster.entity(Conference, command.conference)
     if (!conference) {
       throw new Error(
         `There are no registered conferences called ${command.conference}. Please, ask questions in an existing conference`
