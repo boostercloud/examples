@@ -27,20 +27,19 @@ export const QuestionsView = () => {
     variables: {
       id: localStorage.getItem('conference')
     },
-    pollInterval: 5000
+    pollInterval: 250
   });
 
   useEffect(() => {
-    if (queryConferenceResult.error) {
-      CreateConference({
-        variables: {
-          location: localStorage.getItem('location'),
-          id: localStorage.getItem('conference')
-        }
-      }).catch(e => console.log(e))
-    };
-  }, [queryConferenceResult, CreateConference]);
+    CreateConference({
+      variables: {
+        location: localStorage.getItem('location'),
+        name: localStorage.getItem('conference')
+      }
+    }).then(() => console.log('Creating')).catch(e => console.log(e))
+  }, [CreateConference]);
 
+  
   if (queryConferenceResult.loading || createConferenceResult.loading) {
     return <p>Loading....</p>
   }
@@ -49,7 +48,7 @@ export const QuestionsView = () => {
     <Box className={classes.wrapper}>
       <Box display='flex' flexDirection='column' padding={10}>
         <QuestionsForm />
-        <QuestionsList questions={queryConferenceResult.data?.questions}/>
+        <QuestionsList questions={queryConferenceResult.data?.ConferenceReadModel?.questions || []}/>
       </Box>
     </Box>
   </Box>

@@ -1,6 +1,8 @@
 
+import { useMutation } from '@apollo/client';
 import { Button, TextField, makeStyles, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
+import { CREATE_QUESTION } from '../../common/graphql-queries';
 
 const useStyles = makeStyles(theme => ({
   textInput: {
@@ -15,11 +17,21 @@ const useStyles = makeStyles(theme => ({
 
 export const QuestionsForm = () => {
   const classes = useStyles();
-  const [question, setQuestion] = useState('What is Booster all about?')
+  const [question, setQuestion] = useState('')
+  const [Ask] = useMutation(CREATE_QUESTION);
 
-   // component handlers
    const onSubmit = () => {
-    setQuestion('')
+    Ask({
+      variables: {
+        who: localStorage.getItem('email'),
+        conference: localStorage.getItem('conference'),
+        question
+      }
+    })
+    .then(() => {
+      setQuestion('')
+    })
+    .catch(e => console.log(e))
   };
 
   return (
@@ -37,7 +49,7 @@ export const QuestionsForm = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
         value={question}
       />
-      <Button variant="contained" color="primary" className={classes.submit} onClick={onSubmit} disableElevation>
+      <Button variant="contained" color="primary" disabled={question.length === 0} className={classes.submit} onClick={onSubmit} disableElevation>
         Ask!
     </Button>
     </>

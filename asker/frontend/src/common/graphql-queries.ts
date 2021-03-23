@@ -15,3 +15,15 @@ export const GET_CONFERENCE = gql`
     }
   }
 `;
+
+export const CREATE_QUESTION = gql`
+  mutation Ask($who: String, $question: String, $conference: ID!) {
+    Ask(input:  { who: $who, question: $question, conference: $conference })
+  }
+`;
+
+export const CLAP_QUESTION = gql`
+  mutation Clap($questionId: ID!, $byWhom: String) {
+    Clap(input:  { questionId: $questionId, byWhom: $byWhom })
+  }
+`;

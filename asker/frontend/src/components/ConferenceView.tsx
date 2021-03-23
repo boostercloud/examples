@@ -44,8 +44,9 @@ export const ConferenceView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  const [serverUrl, setServerUrl] = useState('https://jxmcfh2ctb.execute-api.us-east-1.amazonaws.com/on-aws/graphql')
+  const [serverUrl, setServerUrl] = useState('https://s55vk1ty90.execute-api.us-east-1.amazonaws.com/on-aws/graphql')
   const [email, setEmail] = useState('john@booster.cloud')
+  const [location, setLocation] = useState('Canary Islands')
   const [fullName, setFullName] = useState('John Doe')
   const [conference, setConference] = useState('booster-conference')
 
@@ -55,6 +56,7 @@ export const ConferenceView = () => {
     localStorage.setItem('email', email)
     localStorage.setItem('conference', conference)
     localStorage.setItem('fullName', fullName)
+    localStorage.setItem('location', location)
     navigate(`/conference/${conference}`);
   }
 
@@ -86,6 +88,13 @@ export const ConferenceView = () => {
             label='Conference'
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConference(e.target.value)}
             value={conference}
+          />
+           <TextField
+            className={classes.textInput}
+            inputMode='text'
+            label='Location'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value)}
+            value={location}
           />
           <TextField
             className={classes.textInput}

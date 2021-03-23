@@ -1,8 +1,10 @@
 
-import { Box, makeStyles, Typography, Tooltip, Avatar, Divider } from '@material-ui/core';
+import { Box, makeStyles, Typography, Tooltip, Avatar, Divider, IconButton } from '@material-ui/core';
 import React from 'react';
-import { FavoriteBorderOutlined } from '@material-ui/icons'
 import { getInitials, colors } from '../../common/helpers';
+import StarsIcon from '@material-ui/icons/Stars';
+import { useMutation } from '@apollo/client';
+import { CLAP_QUESTION } from '../../common/graphql-queries';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,6 +53,7 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     fontSize: 16,
+    fontWeight: 600,
   },
   wrapper: {
     width: '80%',
@@ -76,10 +79,22 @@ type QuestionItemProps = {
 const QuestionItem = (props: QuestionItemProps) => {
   const { question, index } = props
   const classes = useStyles()
+
+  const [Clap] = useMutation(CLAP_QUESTION);
+
+  const onCountChange = () => {
+    Clap({
+      variables: {
+        byWhom: localStorage.getItem('email'),
+        questionId: question.id
+      }
+    }).then(() => console.log('Creating')).catch(e => console.log(e))
+  }
+
   return (
     <>
       <Box key={question.id} mt={4} mb={4}>
-        <Box display='flex'>
+        <Box display='flex' alignItems='center'>
           <Tooltip title={question.questioner} aria-label='add'>
             <Avatar style={{ backgroundColor: colors[index % colors.length] }}>{getInitials(question.questioner)}</Avatar>
           </Tooltip>
@@ -92,10 +107,15 @@ const QuestionItem = (props: QuestionItemProps) => {
             </Typography>
           </Box>
           <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-            <FavoriteBorderOutlined fontSize='large' color="primary" />
+            <IconButton aria-label="delete" onClick={onCountChange}>
+              <StarsIcon fontSize='large' color='secondary' />
+            </IconButton>
+            {question.claps > 0 && <Typography color='textSecondary' className={classes.postedAt}>
+              {question.claps}
+            </Typography>}
           </Box>
         </Box>
-        <Box mt={2}>
+        <Box mt={2} pl={7}>
           <Typography color='textPrimary' className={classes.question}>
             {question.text}
           </Typography>
@@ -118,7 +138,8 @@ export const QuestionsList = (props: QuestionListProps) => {
       Questions:
     </Typography>
     { questions.map((item, index) => {
-      return <QuestionItem question={item} index={index} />
-    }) }
+      return <QuestionItem key={item.id} question={item} index={index} />
+    })}
   </>)
 };
+
