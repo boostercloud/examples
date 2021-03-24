@@ -11,16 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     height: '100vh',
   },
-  left: {
-    backgroundColor: theme.palette.background.paper,
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
-    paddingLeft: 20,
-    paddingTop: 20,
-    paddingRight: 50,
-    minHeight: '600px',
-  },
-  right: {
+  section: {
     backgroundColor: theme.palette.background.paper,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
@@ -62,15 +53,17 @@ export const ConferenceView = () => {
 
   return (
     <Box className={classes.root}>
-      <Box padding={10} alignSelf='center' width='50%' height='50%' className={classes.left}>
-        <Typography variant='h3' className={classes.title} color='primary'>
-          Welcome to Asker
-        </Typography>
-        <Typography variant='h5' color='secondary'>
-          Ask live whatever you want and vote for your favourite question
-        </Typography>
+      <Box alignSelf='center' width='50%' height='50%' className={classes.section}>
+        <Box padding={10} alignSelf='center'>
+          <Typography variant='h3' className={classes.title} color='primary'>
+            Welcome to Asker
+          </Typography>
+          <Typography variant='h5' color='secondary'>
+            Ask live whatever you want and vote for your favourite question
+          </Typography>
+        </Box>
       </Box>
-      <Box alignSelf='center' width='50%' height='50%' className={classes.right}>
+      <Box alignSelf='center' width='50%' height='50%' className={classes.section}>
         <Box display='flex' flexDirection='column' padding={10}>
           <Typography variant='h6' color='secondary'>
             Let's ask?
@@ -89,7 +82,7 @@ export const ConferenceView = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConference(e.target.value)}
             value={conference}
           />
-           <TextField
+          <TextField
             className={classes.textInput}
             inputMode='text'
             label='Location'
