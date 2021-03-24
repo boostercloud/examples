@@ -7,40 +7,6 @@ import { useMutation } from '@apollo/client';
 import { CLAP_QUESTION } from '../../common/graphql-queries';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    display: 'flex',
-    justifyContent: 'space-around',
-    justifySelf: 'center',
-    flexDirection: 'row',
-    height: '100vh',
-  },
-  left: {
-    backgroundColor: theme.palette.background.paper,
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
-    paddingLeft: 20,
-    paddingTop: 20,
-    paddingRight: 50,
-    minHeight: '600px',
-  },
-  right: {
-    backgroundColor: theme.palette.background.paper,
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8,
-    minHeight: '600px',
-  },
-  title: {
-    marginBottom: 10
-  },
-  textInput: {
-    marginBottom: 20,
-    marginTop: 30,
-  },
-  submit: {
-    marginBottom: 10,
-    marginTop: 50,
-  },
   postedBy: {
     fontSize: 14,
     fontWeight: 600,
@@ -48,15 +14,9 @@ const useStyles = makeStyles(theme => ({
   postedAt: {
     fontSize: 12,
   },
-  likes: {
-    fontSize: 16,
-  },
   question: {
     fontSize: 16,
     fontWeight: 600,
-  },
-  wrapper: {
-    width: '80%',
   },
   questionTitle: {
     marginTop: 50,
