@@ -24,15 +24,15 @@ export class ConferenceStats {
 
     allWords[entity.name] = wordCount + 1
     switch (entity.type) {
-      case 'verb':
+      case 'V':
         verbs[entity.name] = wordCount + 1
         break
 
-      case 'noun':
+      case 'N':
         nouns[entity.name] = wordCount + 1
         break
 
-      case 'adjective':
+      case 'A':
         adjectives[entity.name] = wordCount + 1
         break
 
