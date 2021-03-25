@@ -1,6 +1,6 @@
 import { Entity, Reduces } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
-import { WordPicked } from '../events/word-picked'
+import { WordCategorized } from '../events/word-categorized'
 
 @Entity
 export class Word {
@@ -10,12 +10,12 @@ export class Word {
     readonly questionId: UUID,
     readonly conferenceId: UUID,
     readonly type: string,
+    readonly numberOfAppearances: number
   ) {}
 
-  @Reduces(WordPicked)
-  public static reduceWordPicked(event: WordPicked, currentWord?: Word): Word {
-    const type: string = 'TODO'
-    return new Word(event.id, event.name, event.questionId, event.conferenceId, type)
+  @Reduces(WordCategorized)
+  public static reduceWordPicked(event: WordCategorized, currentWord?: Word): Word {
+    const count = currentWord?.numberOfAppearances ?? 0
+    return new Word(event.id, event.name, event.questionId, event.conferenceId, event.wordType, count + 1)
   }
-
 }

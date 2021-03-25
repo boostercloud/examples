@@ -7,8 +7,7 @@ import { Register, UUID } from '@boostercloud/framework-types'
 export class SplitQuestionsIntoWords {
   public static async handle(event: QuestionCreated, register: Register): Promise<void> {
     const words = event.text.split(' ')
-    for (const word in words) {
-      register.events(new WordPicked(word, UUID.generate(), event.id, event.conferenceId))
-    }
+    const events = words.map(w => new WordPicked(w, UUID.generate(), event.id, event.conferenceId))
+    register.events(...events)
   }
 }
