@@ -40,7 +40,7 @@ export const QuestionsForm = () => {
         {localStorage.getItem('conference')}
       </Typography>
       <Typography variant='h6' color='secondary'>
-        Connected as: {localStorage.getItem('fullName')} • {localStorage.getItem('email')}
+        Connected as: {localStorage.getItem('email')}
       </Typography>
       <TextField
         className={classes.textInput}

@@ -26,8 +26,7 @@ export const QuestionsView = () => {
   const queryConferenceResult = useQuery(GET_CONFERENCE, {
     variables: {
       id: localStorage.getItem('conference')
-    },
-    pollInterval: 250
+    }
   });
 
   useEffect(() => {

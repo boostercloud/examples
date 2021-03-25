@@ -7,7 +7,16 @@ import App from './App';
 const theme = createMuiTheme({
   palette: {
     type: 'light',
-  }
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundColor: '#3f51b5',
+        },
+      },
+    },
+  },
 });
 
 

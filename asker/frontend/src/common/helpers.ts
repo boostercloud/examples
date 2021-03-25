@@ -3,3 +3,5 @@ export const getInitials = (name: string) => {
 };
 
 export const colors = ['#EE79A5', '#AFCD97', '#F3A864', '#5A7CF5', '#6950F1'];
+
+export type RefreshConection = (url: string) => void
