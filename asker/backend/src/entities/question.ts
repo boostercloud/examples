@@ -7,6 +7,7 @@ import { QuestionClapped } from '../events/question-clapped'
 export class Question {
   public constructor(
     public id: UUID,
+    readonly askedOn: string,
     readonly conferenceId: UUID,
     readonly questioner: string,
     readonly text: string,
@@ -15,7 +16,7 @@ export class Question {
 
   @Reduces(QuestionAsked)
   public static reduceQuestionAsked(event: QuestionAsked): Question {
-    return new Question(event.questionId, event.conference, event.questioner, event.text, 0)
+    return new Question(event.questionId, event.when, event.conference, event.questioner, event.text, 0)
   }
 
   @Reduces(QuestionClapped)
@@ -25,6 +26,7 @@ export class Question {
     }
     return new Question(
       currentQuestion.id,
+      currentQuestion.askedOn,
       currentQuestion.conferenceId,
       currentQuestion.questioner,
       currentQuestion.text,

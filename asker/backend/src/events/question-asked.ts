@@ -5,6 +5,7 @@ import { UUID } from '@boostercloud/framework-types'
 export class QuestionAsked {
   public constructor(
     readonly questionId: UUID,
+    readonly when: string,
     readonly questioner: string,
     readonly conference: UUID,
     readonly text: string
