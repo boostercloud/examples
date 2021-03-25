@@ -29,8 +29,10 @@ export default function Selector<TOption extends string>(
 ): JSX.Element {
   return (
     <>
-      {props.options.map((option) => (
-        <SelectionButton {...props}>{option}</SelectionButton>
+      {props.options.map((option, index) => (
+        <SelectionButton key={option + index} {...props}>
+          {option}
+        </SelectionButton>
       ))}
     </>
   );
