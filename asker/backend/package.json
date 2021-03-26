@@ -7,6 +7,7 @@
     "@boostercloud/framework-core": "0.12.4",
     "@boostercloud/framework-provider-aws": "0.12.4",
     "@boostercloud/framework-types": "0.12.4",
+    "@boostercloud/rocket-kakfa-connector-aws-infrastructure": "1.0.0",
     "tslib": "2.1.0"
   },
   "devDependencies": {
