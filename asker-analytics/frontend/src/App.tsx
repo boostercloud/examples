@@ -58,6 +58,7 @@ type WordCategory = 'all words' | 'nouns' | 'verbs' | 'adjectives';
 
 const VerticalBar = () => {
   const [shownElements, setShownElements] = useState(10);
+  const [conferenceId, setConferenceId] = useState('');
   const [dataset, setDataset] = useState({} as Record<string, number>);
   const [selectedCategory, setSelectedCategory] = useState(
     'all words' as WordCategory,
@@ -83,7 +84,11 @@ const VerticalBar = () => {
                   <h1 className="title">Asker Analytics</h1>
                 </M.Grid>
                 <M.Grid container item justify="flex-end" xs={3}>
-                  <M.TextField label="Conference ID" variant="outlined" />
+                  <M.TextField
+                    label="Conference ID"
+                    variant="outlined"
+                    onChange={(e) => setConferenceId(e.target.value)}
+                  />
                 </M.Grid>
                 <M.Grid item xs={12}>
                   <Bar data={data(dataset, shownElements)} options={options} />
