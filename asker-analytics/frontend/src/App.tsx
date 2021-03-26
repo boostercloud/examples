@@ -72,7 +72,6 @@ const CONFERENCE_STATS_SUBSCRIPTION = gql`
 `;
 
 const VerticalBar = () => {
-  const [shownElements, setShownElements] = useState(10);
   const [conferenceId, setConferenceId] = useState('');
   const [data, setData] = useState(
     {} as Record<WordCategory, Record<string, number>>,
