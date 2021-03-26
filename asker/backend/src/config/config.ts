@@ -23,7 +23,7 @@ Booster.configure('on-aws', (config: BoosterConfig): void => {
         bootstrapServers: [
           'fast-caboose-01.srvs.cloudkafka.com:9094',
         ],
-        secretArn: process.env.secretArn
+        secretArn: 'arn:aws:secretsmanager:us-east-1:515849006004:secret:AskerSecretProducer-Ezrc1w'
       },
     },
   ])

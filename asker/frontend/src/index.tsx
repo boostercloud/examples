@@ -12,7 +12,7 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       '@global': {
         body: {
-          backgroundColor: '#3f51b5',
+          backgroundImage: 'linear-gradient(to right top, #3f51b5, #006CC6, #0080C5, #0091B5, #009E9D)',
         },
       },
     },

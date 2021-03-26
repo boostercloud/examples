@@ -37,7 +37,7 @@ export const QuestionsForm = () => {
   return (
     <>
       <Typography variant='h4' color='secondary'>
-        {localStorage.getItem('conference')}
+        Conference: {localStorage.getItem('conference')}
       </Typography>
       <Typography variant='h6' color='secondary'>
         Connected as: {localStorage.getItem('email')}

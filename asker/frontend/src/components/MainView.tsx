@@ -7,7 +7,7 @@ import { RefreshConection } from '../common/helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#00000000',
     display: 'flex',
     justifyContent: 'space-around',
     justifySelf: 'center',
