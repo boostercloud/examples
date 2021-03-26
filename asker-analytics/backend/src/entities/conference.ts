@@ -1,14 +1,14 @@
 import { Entity, Reduces } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
-import { QuestionCreated } from '../events/question-created'
+import { QuestionAsked } from '../events/question-asked'
 import { WordPicked } from '../events/word-picked'
 
 @Entity
 export class Conference {
   public constructor(public id: UUID) {}
 
-  @Reduces(QuestionCreated)
-  public static reduceQuestionCreated(event: QuestionCreated, _currentConference?: Conference): Conference {
+  @Reduces(QuestionAsked)
+  public static reduceQuestionCreated(event: QuestionAsked, _currentConference?: Conference): Conference {
     return new Conference(event.conferenceId)
   }
 

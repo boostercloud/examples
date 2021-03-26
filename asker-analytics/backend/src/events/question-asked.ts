@@ -2,7 +2,7 @@ import { Event } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
 
 @Event
-export class QuestionCreated {
+export class QuestionAsked {
   public constructor(
     readonly text: string,
     readonly id: UUID,
