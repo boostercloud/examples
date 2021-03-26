@@ -8,24 +8,26 @@ Booster.configure('on-aws', (config: BoosterConfig): void => {
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
       parameters: {
-        consumerConfig: [{
-          topicName: 'asker-questions',
-          mappingOptions: [{
-            topicEntityId: 'conferenceId',
-            entityTypeName: 'Conference',
-            eventTypeName: 'QuestionAsked',
-            fields: {
-              questionId: 'questionId',
-              conferenceId: 'id',
-              text: 'text',
-            },
-          }],
-        }],
-        producerConfig: [],
-        bootstrapServers: [
-          'fast-caboose-01.srvs.cloudkafka.com:9094',
+        consumerConfig: [
+          {
+            topicName: 'asker-questions',
+            mappingOptions: [
+              {
+                topicEntityId: 'conferenceId',
+                entityTypeName: 'Conference',
+                eventTypeName: 'QuestionAsked',
+                fields: {
+                  questionId: 'questionId',
+                  conferenceId: 'id',
+                  text: 'text',
+                },
+              },
+            ],
+          },
         ],
-        secretArn: 'arn:aws:secretsmanager:us-east-1:515849006004:secret:AskerSecretProducer-Ezrc1w'
+        producerConfig: [],
+        bootstrapServers: ['fast-caboose-01.srvs.cloudkafka.com:9094'],
+        secretArn: process.env.secretArn,
       },
     },
   ])
