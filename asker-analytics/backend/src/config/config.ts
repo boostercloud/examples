@@ -3,7 +3,7 @@ import { BoosterConfig } from '@boostercloud/framework-types'
 import { Provider } from '@boostercloud/framework-provider-aws'
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = 'asker-analytics-charlie'
+  config.appName = 'asker-analytics'
   config.provider = Provider([
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
