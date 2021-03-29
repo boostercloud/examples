@@ -14,14 +14,14 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
 const wsLink = new WebSocketLink({
-  uri: 'wss://2z4msrnme1.execute-api.eu-west-1.amazonaws.com/on-aws/',
+  uri: 'wss://da9fyn0wck.execute-api.us-east-1.amazonaws.com/on-aws/',
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: 'https://sqh8gk2x2k.execute-api.eu-west-1.amazonaws.com/on-aws/graphql',
+  uri: 'https://ediw2m695e.execute-api.us-east-1.amazonaws.com/on-aws/graphql',
 });
 
 const splitLink = split(

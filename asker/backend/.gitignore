@@ -10,5 +10,4 @@ node_modules
 coverage
 .booster
 .deploy
-
-package-lock.json
+.env
