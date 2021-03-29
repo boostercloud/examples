@@ -9,5 +9,4 @@ node_modules
 .idea
 coverage
 .booster
-
-package-lock.json
+.env
