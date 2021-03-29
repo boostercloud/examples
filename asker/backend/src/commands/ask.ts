@@ -22,6 +22,8 @@ export class Ask {
         `There are no registered conferences called ${command.conference}. Please, ask questions in an existing conference`
       )
     }
-    register.events(new QuestionAsked(UUID.generate(), command.who, command.conference, command.question))
+    register.events(
+      new QuestionAsked(UUID.generate(), new Date().toISOString(), command.who, command.conference, command.question)
+    )
   }
 }

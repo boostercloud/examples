@@ -3,12 +3,12 @@ import { BoosterConfig } from '@boostercloud/framework-types'
 import { Provider } from '@boostercloud/framework-provider-aws'
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = 'asker-backend'
+  config.appName = 'askme'
   config.provider = Provider([])
 })
 
 Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
-  config.appName = 'asker-backend-with-kafka'
+  config.appName = 'askme-with-kafka'
   config.provider = Provider([
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
