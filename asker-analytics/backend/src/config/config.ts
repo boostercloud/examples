@@ -17,8 +17,8 @@ Booster.configure('on-aws', (config: BoosterConfig): void => {
                 entityTypeName: 'Conference',
                 eventTypeName: 'QuestionAsked',
                 fields: {
-                  questionId: 'questionId',
-                  conferenceId: 'id',
+                  questionId: 'id',
+                  conferenceId: 'conferenceId',
                   text: 'text',
                 },
               },

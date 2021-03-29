@@ -50,8 +50,8 @@ const sortDataset = (
 };
 
 const CONFERENCE_STATS_QUERY = gql`
-  query {
-    ConferenceStats {
+  query ConferenceStatistic($id: ID!) {
+    ConferenceStatistic(id: $id) {
       verbs
       nouns
       adjectives
@@ -61,8 +61,8 @@ const CONFERENCE_STATS_QUERY = gql`
 `;
 
 const CONFERENCE_STATS_SUBSCRIPTION = gql`
-  subscription {
-    ConferenceStats {
+  subscription ConferenceStatistic($id: ID!) {
+    ConferenceStatistic(id: $id) {
       verbs
       nouns
       adjectives
@@ -83,7 +83,11 @@ const VerticalBar = () => {
     data: queryData,
   } = useQuery(CONFERENCE_STATS_QUERY, {
     onCompleted: (data) => {
-      setData(data['ConferenceStats'][0]);
+      if (!data.ConferenceStatistic) return;
+      setData(data['ConferenceStatistic']);
+    },
+    variables: {
+      id: conferenceId,
     },
   });
   const {
@@ -93,7 +97,11 @@ const VerticalBar = () => {
   } = useSubscription(CONFERENCE_STATS_SUBSCRIPTION, {
     onSubscriptionData: ({ subscriptionData }) => {
       const data = subscriptionData.data;
-      setData(data['ConferenceStats']);
+      if (!data.ConferenceStatistic) return;
+      setData(data['ConferenceStatistic']);
+    },
+    variables: {
+      id: conferenceId,
     },
   });
   const [shownElements, setShownElements] = useState(10);

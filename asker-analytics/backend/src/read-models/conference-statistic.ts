@@ -5,7 +5,7 @@ import { Word } from '../entities/word'
 @ReadModel({
   authorize: 'all', // Specify authorized roles here. Use 'all' to authorize anyone
 })
-export class ConferenceStats {
+export class ConferenceStatistic {
   public constructor(
     public id: UUID,
     readonly verbs: Record<string, number>,
@@ -15,7 +15,7 @@ export class ConferenceStats {
   ) {}
 
   @Projects(Word, 'conferenceId')
-  public static projectWord(entity: Word, previous?: ConferenceStats): ProjectionResult<ConferenceStats> {
+  public static projectWord(entity: Word, previous?: ConferenceStatistic): ProjectionResult<ConferenceStatistic> {
     const verbs = previous?.verbs ?? {}
     const nouns = previous?.nouns ?? {}
     const adjectives = previous?.adjectives ?? {}
@@ -40,6 +40,6 @@ export class ConferenceStats {
         break
     }
 
-    return new ConferenceStats(entity.conferenceId, verbs, nouns, adjectives, allWords)
+    return new ConferenceStatistic(entity.conferenceId, verbs, nouns, adjectives, allWords)
   }
 }
