@@ -1,14 +1,15 @@
 {
-  "name": "asker",
-  "description": "Tool to ask questions!",
+  "name": "asker-analytics",
+  "description": "Asker Analytics",
   "version": "0.1.0",
   "author": "Booster Cloud",
   "dependencies": {
+    "metadata-booster": "0.3.1",
     "@boostercloud/framework-core": "0.12.4",
-    "@boostercloud/framework-provider-aws": "0.12.4",
     "@boostercloud/framework-types": "0.12.4",
+    "@boostercloud/framework-provider-aws": "0.12.4",
     "@boostercloud/rocket-kakfa-connector-aws-infrastructure": "1.0.0",
-    "tslib": "2.1.0"
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@boostercloud/framework-provider-aws-infrastructure": "0.12.4",
@@ -23,23 +24,22 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.1",
     "ts-node": "^8.6.2",
-    "typescript": "^3.9.3",
-    "artillery": "1.6.2"
+    "typescript": "^3.9.3"
   },
   "engines": {
     "node": ">=8.0.0"
   },
-  "homepage": "https://booster.cloud",
+  "homepage": "",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "https://github.com/boostercloud/examples/",
+  "repository": "",
   "scripts": {
     "lint:check": "eslint --ext '.js,.ts' **/*.ts",
     "lint:fix": "eslint --quiet --fix --ext '.js,.ts' **/*.ts",
-    "compile": "npx tsc -b tsconfig.json",
+    "compile": "npx ttypescript -b tsconfig.json",
     "deploy": "boost deploy",
     "clean": "npx rimraf ./dist tsconfig.tsbuildinfo",
-    "test": "npx nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
+    "test": "AWS_SDK_LOAD_CONFIG=true BOOSTER_ENV=test npx nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
   },
   "types": "lib/index.d.ts"
 }
