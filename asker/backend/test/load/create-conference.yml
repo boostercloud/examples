@@ -3,28 +3,21 @@ config:
   plugins:
     expect: {}
   phases:
-    - duration: 5
-      arrivalRate: 20
-      name: Existential questions
+    - duration: 1
+      arrivalCount: 1
   variables:
     conferenceName: "{{ $processEnvironment.CONFERENCE_NAME }}"
-  payload:
-    path: "./questions.csv"
-    fields:
-      - "existential_question"
 
 scenarios:
-  # We define one scenario:
-  - name: "Ask questions"
+  - name: "Create a conference for the load testing"
     flow:
       - post:
           url: "/"
           body: '{
             "query":"mutation {
-              Ask(input: {
-                conference:\"{{conferenceName}}\"
-                question:\"{{existential_question}}\"
-                who:\"alvaro@booster.cloud\"
+              CreateConference(input: {
+                location: \"Canary Islands\",
+                name: \"{{conferenceName}}\"
               })
             }"
           }'
