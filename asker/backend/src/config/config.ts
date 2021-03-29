@@ -2,6 +2,8 @@ import { Booster } from '@boostercloud/framework-core'
 import { BoosterConfig } from '@boostercloud/framework-types'
 import { Provider } from '@boostercloud/framework-provider-aws'
 
+require('dotenv').config()
+
 Booster.configure('on-aws', (config: BoosterConfig): void => {
   config.appName = 'askme'
   config.provider = Provider([])
@@ -25,8 +27,8 @@ Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
             },
           },
         ],
-        bootstrapServers: ['fast-caboose-01.srvs.cloudkafka.com:9094'],
-        secretArn: 'arn:aws:secretsmanager:us-east-1:515849006004:secret:AskerSecretProducer-Ezrc1w',
+        bootstrapServers: process.env.bootstrapServers?.split(','),
+        secretArn: process.env.secretArn,
       },
     },
   ])

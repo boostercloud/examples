@@ -13,15 +13,17 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+console.log(import.meta.env.SNOWPACK_PUBLIC_WS_URL);
+
 const wsLink = new WebSocketLink({
-  uri: 'wss://da9fyn0wck.execute-api.us-east-1.amazonaws.com/on-aws/',
+  uri: import.meta.env.SNOWPACK_PUBLIC_WS_URL!,
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: 'https://ediw2m695e.execute-api.us-east-1.amazonaws.com/on-aws/graphql',
+  uri: import.meta.env.SNOWPACK_PUBLIC_API_URL!,
 });
 
 const splitLink = split(
