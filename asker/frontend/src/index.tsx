@@ -13,6 +13,9 @@ const theme = createMuiTheme({
       '@global': {
         body: {
           backgroundImage: 'linear-gradient(to right top, #3f51b5, #006CC6, #0080C5, #0091B5, #009E9D)',
+          height: '100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         },
       },
     },
