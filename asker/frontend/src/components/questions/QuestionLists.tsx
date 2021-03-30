@@ -1,11 +1,10 @@
-
 import { Box, makeStyles, Typography, Tooltip, Avatar, Divider, IconButton } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, forwardRef, ForwardedRef } from 'react';
 import { getInitials, colors } from '../../common/helpers';
 import { useMutation } from '@apollo/client';
 import { CLAP_QUESTION } from '../../common/graphql-queries';
-import { Fade } from "react-awesome-reveal";
-
+import FlipMove from 'react-flip-move';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   postedBy: {
@@ -32,6 +31,7 @@ type Question = {
   questioner: string
   text: string
   claps: number
+  createdAt: string
 }
 
 type QuestionItemProps = {
@@ -39,16 +39,15 @@ type QuestionItemProps = {
   index: number
 }
 
-const QuestionItem = (props: QuestionItemProps) => {
+const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTMLDivElement>) => {
   const classes = useStyles()
   const [question, setQuestion] = useState(props.question)
 
   const [Clap] = useMutation(CLAP_QUESTION);
 
   const onCountChange = () => {
-
     setQuestion({
-      ...question, 
+      ...question,
       claps: question.claps + 1,
     })
 
@@ -61,7 +60,7 @@ const QuestionItem = (props: QuestionItemProps) => {
   }
 
   return (
-    <>
+    <div ref={ref}>
       <Box key={question.id} mt={4} mb={4}>
         <Box display='flex' alignItems='center'>
           <Tooltip title={question.questioner} aria-label='add'>
@@ -72,7 +71,7 @@ const QuestionItem = (props: QuestionItemProps) => {
               {question.questioner}
             </Typography>
             <Typography color='textSecondary' className={classes.postedAt}>
-              {new Date().toISOString()}
+              {moment(question.createdAt).fromNow()}
             </Typography>
           </Box>
           <Box paddingRight={2} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
@@ -91,9 +90,9 @@ const QuestionItem = (props: QuestionItemProps) => {
         </Box>
       </Box>
       <Divider />
-    </>
+    </div>
   )
-};
+});
 
 type QuestionListProps = {
   questions: Question[]
@@ -107,11 +106,11 @@ export const QuestionsList = (props: QuestionListProps) => {
     <Typography className={classes.questionTitle} variant='h6' color='secondary'>
       Questions:
     </Typography>
-    { questions.map((item, index) => {
-      return <Fade delay={200}>
-        <QuestionItem key={item.id} question={item} index={index} />
-      </Fade>
-    })}
+    <FlipMove>
+      {questions.map((item, index) => {
+        return <QuestionItem key={item.id} question={item} index={index} />
+      })}
+    </FlipMove>
   </>)
 };
 

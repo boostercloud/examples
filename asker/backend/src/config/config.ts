@@ -5,7 +5,7 @@ import { Provider } from '@boostercloud/framework-provider-aws'
 require('dotenv').config()
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = 'askme'
+  config.appName = 'askme-charlie'
   config.provider = Provider([])
 })
 

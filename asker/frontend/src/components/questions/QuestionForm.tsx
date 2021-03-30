@@ -12,6 +12,13 @@ const useStyles = makeStyles(theme => ({
   submit: {
     marginBottom: 10,
     marginTop: 50,
+  },
+  logo: {
+    fontFamily: 'Pacifico',
+    fontStyle: 'cursive',
+    paddingBottom: 50,
+    textAlign: 'center',
+    fontSize: '80px'
   }
 }))
 
@@ -36,6 +43,9 @@ export const QuestionsForm = () => {
 
   return (
     <>
+     <Typography variant='h2' color='primary' className={classes.logo}>
+       ask.me
+      </Typography>
       <Typography variant='h4' color='secondary'>
         Conference: {localStorage.getItem('conference')}
       </Typography>
