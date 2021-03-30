@@ -1,13 +1,19 @@
 import { Booster } from '@boostercloud/framework-core'
 import { BoosterConfig } from '@boostercloud/framework-types'
 import { Provider as ProviderAWS } from '@boostercloud/framework-provider-aws'
-import  { Provider  as ProviderK8s} from '@boostercloud/framework-provider-kubernetes'
+import { Provider as ProviderK8s } from '@boostercloud/framework-provider-kubernetes'
+import { Provider as ProviderAzure } from '@boostercloud/framework-provider-azure'
 import { BoosterK8sConfiguration } from '@boostercloud/framework-provider-kubernetes-infrastructure'
 require('dotenv').config()
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
   config.appName = 'askme'
   config.provider = ProviderAWS([])
+})
+
+Booster.configure('on-azure', (config: BoosterConfig): void => {
+  config.appName = 'askme'
+  config.provider = ProviderAzure()
 })
 
 Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
