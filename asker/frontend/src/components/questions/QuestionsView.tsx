@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     width: '100%',
   },
-  list: {}
+  list: {},
 }))
 
 export const QuestionsView = () => {

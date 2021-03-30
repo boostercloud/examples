@@ -10,7 +10,7 @@ Booster.configure('on-aws', (config: BoosterConfig): void => {
 })
 
 Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
-  config.appName = 'askme-with-kafka'
+  config.appName = 'askme-charlie-with-kafka'
   config.provider = Provider([
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
