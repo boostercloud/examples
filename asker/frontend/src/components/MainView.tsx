@@ -36,6 +36,11 @@ const useStyles = makeStyles(theme => ({
   submit: {
     marginBottom: 10,
     marginTop: 50,
+  },
+  logo: {
+    fontFamily: 'Pacifico',
+    fontStyle: 'cursive',
+    fontSize: '60px'
   }
 }))
 
@@ -89,7 +94,7 @@ export const MainView = (props: MainViewProps) => {
       <Box alignSelf='center' width='50%' height='50%' className={classes.sectionLeft}>
         <Box padding={10} alignSelf='center'>
           <Typography variant='h3' className={classes.title} color='primary'>
-            Welcome to Asker
+            Welcome to <span className={classes.logo}>ask.me</span>
           </Typography>
           <Typography variant='h5' color='secondary'>
             Ask live whatever you want and vote for your favourite question

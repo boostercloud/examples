@@ -15,14 +15,13 @@ const useStyles = makeStyles(theme => ({
     marginTop: 100,
     marginBottom: 100,
     borderRadius: 8,
+    height: '100%',
+    overflow: 'auto'
   },
   wrapper: {
     width: '100%',
   },
-  list: {
-    height: 800,
-    overflow: 'auto'
-  }
+  list: {}
 }))
 
 export const QuestionsView = () => {

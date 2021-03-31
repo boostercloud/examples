@@ -5,14 +5,15 @@
   "author": "Booster Cloud",
   "dependencies": {
     "metadata-booster": "0.3.1",
-    "@boostercloud/framework-core": "0.12.4",
-    "@boostercloud/framework-types": "0.12.4",
-    "@boostercloud/framework-provider-aws": "0.12.4",
-    "@boostercloud/rocket-kakfa-connector-aws-infrastructure": "1.0.0",
+    "@boostercloud/framework-core": "0.14.1",
+    "@boostercloud/framework-types": "0.14.1",
+    "@boostercloud/framework-provider-aws": "0.14.1",
+    "dotenv": "^8.2.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
-    "@boostercloud/framework-provider-aws-infrastructure": "0.12.4",
+    "@boostercloud/framework-provider-aws-infrastructure": "0.14.1",
+    "@boostercloud/rocket-kakfa-connector-aws-infrastructure": "1.0.0",
     "@types/node": "^13.5.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
