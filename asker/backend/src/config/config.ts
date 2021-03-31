@@ -7,7 +7,7 @@ import { BoosterK8sConfiguration } from '@boostercloud/framework-provider-kubern
 require('dotenv').config()
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = config.appName = process.env.appName ?? 'askme'
+  config.appName = process.env.appName ?? 'askme'
   config.provider = ProviderAWS([])
 })
 
