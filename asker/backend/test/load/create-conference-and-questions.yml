@@ -1,3 +1,6 @@
+# Execute with like this:
+# artillery run --target  <graphql endpoint> --variables '{"conferenceName":"<conference name to create>"}' test/load/create-conference-and-questions.yml
+
 config:
   plugins:
     expect: {}
@@ -8,16 +11,6 @@ config:
     existentialQuestions:
       - [
           "What marks the end of life? Is it death or is it when no one is left to remember us?",
-          "Can you ever have full control over your own life?",
-          "What is the location of the soul? Does it reside within you?",
-          "Do people exist before they are born?",
-          "What is more real: how you perceive yourself, or how others perceive you?",
-          "Is it scarier to think we are the most advanced form of life in the universe or that we could be among the least advanced forms of life?",
-          "What events have caused me to feel uneasy in my life?",
-          "Can I locate what in my life is causing my crisis? Can those things be changed?",
-          "Is there someone in my life that I can talk through this with?",
-          "Can this period of reflection bring me to a more positive place?",
-          "Is this crisis the result of an instigating event or extended boredom?",
           "Are there resources that answer the questions I am having? If not, is it okay that there is not an answer?",
           "What is an activity I have done that has made me feel the most alive?",
           "Can I repeat that activity now or soon?",
@@ -64,6 +57,7 @@ scenarios:
           }'
           expect:
             - notHasProperty: errors
+      - think: 2
       - loop:
           - post:
               url: "/"
