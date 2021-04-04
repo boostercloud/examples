@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { CLAP_QUESTION } from '../../common/graphql-queries';
 import FlipMove from 'react-flip-move';
 import moment from 'moment';
+import { FavoriteBorder, Favorite } from '@material-ui/icons'
 
 const useStyles = makeStyles(theme => ({
   postedBy: {
@@ -22,7 +23,10 @@ const useStyles = makeStyles(theme => ({
   },
   questionTitle: {
     marginTop: 50,
-  }
+  },
+  heartColor: {
+    color: '#f44336'
+  },
 }))
 
 type Question = {
@@ -76,9 +80,9 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
           </Box>
           <Box paddingRight={2} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
             <IconButton aria-label="delete" onClick={onCountChange}>
-              👏
+              {question.claps === 0 ? <FavoriteBorder className={classes.heartColor} /> : <Favorite className={classes.heartColor} /> } 
             </IconButton>
-            {question.claps > 0 && <Typography color='secondary' className={classes.postedAt}>
+            {question.claps > 0 && <Typography style={{ color: '#f44336' }} className={classes.postedAt}>
               {question.claps}
             </Typography>}
           </Box>
