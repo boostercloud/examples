@@ -1,9 +1,11 @@
 
 import { useMutation } from '@apollo/client';
-import { Button, TextField, makeStyles, Typography, Box, IconButton } from '@material-ui/core';
+import { Button, TextField, makeStyles, Typography, Box, IconButton, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 import { CREATE_QUESTION } from '../../common/graphql-queries';
-import { FavoriteBorder, Favorite } from '@material-ui/icons'
+import { Copy } from 'react-feather'
+import { countLikes, Question } from '../../common/types';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,23 +29,32 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const QuestionsForm = () => {
+type QuestionsFormProps = {
+  questions: Question[]
+}
+
+export const QuestionsForm = (props: QuestionsFormProps) => {
   const classes = useStyles();
   const [question, setQuestion] = useState('')
-  const [Ask] = useMutation(CREATE_QUESTION);
+  const [Ask] = useMutation(CREATE_QUESTION)
 
-   const onSubmit = () => {
+
+  const generateCopyLink = () => {
+    return `${window.location.origin}/conference?serverUrl=${localStorage.getItem('serverUrl')}&conference=${localStorage.getItem('conference')}`
+  }
+
+  const onSubmit = () => {
     Ask({
       variables: {
-        who: localStorage.getItem('email'),
+        who: localStorage.getItem('userName'),
         conference: localStorage.getItem('conference'),
         question
       }
     })
-    .then(() => {
-      setQuestion('')
-    })
-    .catch(e => console.log(e))
+      .then(() => {
+        setQuestion('')
+      })
+      .catch(e => console.log(e))
   };
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -54,8 +65,8 @@ export const QuestionsForm = () => {
 
   return (
     <>
-     <Typography variant='h2' color='primary' className={classes.logo}>
-       ask.me
+      <Typography variant='h2' color='primary' className={classes.logo}>
+        ask.me
       </Typography>
       <Box display='flex' flexDirection='row'>
         <Box display='flex' flexDirection='column' flexGrow='1' >
@@ -63,29 +74,41 @@ export const QuestionsForm = () => {
             Conference: {localStorage.getItem('conference')}
           </Typography>
           <Typography variant='h6' color='secondary'>
-            Connected as: {localStorage.getItem('email')}
+            Connected as: {localStorage.getItem('userName')}
           </Typography>
           <Typography variant='h6' className={classes.serverTitle} color='secondary'>
             Connected to: {localStorage.getItem('serverUrl')}
           </Typography>
+          <Typography style={{ marginTop: 10 }} variant='h6' className={classes.serverTitle} color='primary'>
+            Questions asked: {props.questions.length}
+          </Typography>
+          <Typography variant='h6' className={classes.serverTitle} color='primary'>
+            Global Likes: {countLikes(props.questions)}
+          </Typography>
         </Box>
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' alignContent='center'>
-          <IconButton aria-label="delete">
-            <FavoriteBorder />
-          </IconButton>
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' alignContent='center' paddingRight={2}>
+          <Tooltip title="Copy conference URL">
+            <CopyToClipboard text={generateCopyLink()} onCopy={() => alert('The conference link has been copied to your clipboard')}>
+              <IconButton aria-label="delete" color='secondary'>
+                <Copy size={'36'} />
+              </IconButton>
+            </CopyToClipboard>
+          </Tooltip>
         </Box>
       </Box>
-      <TextField
-        className={classes.textInput}
-        inputMode='url'
-        label='Question?'
-        onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => onKeyPress(e)}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
-        value={question}
-      />
-      <Button variant="contained" color="primary" disabled={question.length === 0} className={classes.submit} onClick={onSubmit} disableElevation>
-        Ask!
-    </Button>
+      <Box display='flex' flexDirection='column' style={{ backgroundColor: '#f0f0f0', marginTop: 32, borderRadius: 6, padding: 16 }}>
+        <TextField
+          className={classes.textInput}
+          inputMode='url'
+          label='Question?'
+          onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => onKeyPress(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
+          value={question}
+        />
+        <Button variant="contained" color="primary" disabled={question.length === 0} className={classes.submit} onClick={onSubmit} disableElevation>
+          Ask!
+        </Button>
+      </Box>
     </>
   )
 }
