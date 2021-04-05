@@ -7,7 +7,7 @@ import { BoosterK8sConfiguration } from '@boostercloud/framework-provider-kubern
 require('dotenv').config()
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = process.env.appName ?? 'askme'
+  config.appName = 'askme'
   config.provider = ProviderAWS([])
 })
 
@@ -17,7 +17,7 @@ Booster.configure('on-azure', (config: BoosterConfig): void => {
 })
 
 Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
-  config.appName = `${process.env.appName}-with-kafka` ?? 'askme-with-kafka'
+  config.appName = 'askme-with-kafka'
   config.provider = ProviderAWS([
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
@@ -42,19 +42,19 @@ Booster.configure('on-aws-with-kafka', (config: BoosterConfig): void => {
 })
 
 Booster.configure('on-k8s-aws', (config: BoosterK8sConfiguration): void => {
-  config.appName = process.env.appName ?? 'askme'
+  config.appName = 'askme'
   config.provider = ProviderK8s()
   config.context = process.env.clusterK8sAWS
 })
 
 Booster.configure('on-k8s-gcp', (config: BoosterK8sConfiguration): void => {
-  config.appName = process.env.appName ?? 'askme'
+  config.appName = 'askme'
   config.provider = ProviderK8s()
   config.context = process.env.clusterK8sGCP
 })
 
 Booster.configure('on-k8s-azure', (config: BoosterK8sConfiguration): void => {
-  config.appName = process.env.appName ?? 'askme'
+  config.appName = 'askme'
   config.provider = ProviderK8s()
   config.context = process.env.clusterK8sAZURE
 })
