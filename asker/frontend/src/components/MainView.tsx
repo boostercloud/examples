@@ -60,11 +60,11 @@ export const MainView = (props: MainViewProps) => {
 
   const [serverUrl, setServerUrl] = useState(query.get('serverUrl') ?? localStorage.getItem('serverUrl') ?? '')
   const [conference, setConference] = useState(query.get('conference') ?? '')
-  const [email, setEmail] = useState(query.get('email') ?? '')
+  const [userName, setUserName] = useState(query.get('userName') ?? '')
 
   const [ConferenceReadModels, queryConferencesResult] = useLazyQuery(GET_CONFERENCES);
 
-  const isValid = () => serverUrl?.length > 0 && email?.length > 0 && conference?.length > 0 && !queryConferencesResult.error
+  const isValid = () => serverUrl?.length > 0 && userName?.length > 0 && conference?.length > 0 && !queryConferencesResult.error
 
   useEffect(() => {
     ConferenceReadModels();
@@ -79,7 +79,7 @@ export const MainView = (props: MainViewProps) => {
     if (isValid()) {
       // Perform some validation
       localStorage.setItem('serverUrl', serverUrl ?? '')
-      localStorage.setItem('email', email ?? '')
+      localStorage.setItem('userName', userName ?? '')
       localStorage.setItem('conference', conference ?? '')
 
       const location = queryConferencesResult.data?.ConferenceReadModels?.find((item: any) => item.id === conference)?.location
@@ -132,9 +132,9 @@ export const MainView = (props: MainViewProps) => {
           <TextField
             className={classes.textInput}
             inputMode='text'
-            label='Email'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-            value={email}
+            label='Name or Alias'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
+            value={userName}
           />
           <Button variant="contained" color="primary" className={classes.submit} onClick={onSubmit} disableElevation>
             Enter

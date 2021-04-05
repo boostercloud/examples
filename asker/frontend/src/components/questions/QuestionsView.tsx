@@ -1,4 +1,4 @@
-import { Box, CircularProgress, makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import {  useQuery } from '@apollo/client';
 import {  GET_CONFERENCE } from '../../common/graphql-queries';
@@ -37,16 +37,9 @@ export const QuestionsView = () => {
   return (<Box className={classes.root}>
     <Box className={classes.wrapper}>
       <Box display='flex' flexDirection='column' padding={10}>
-        <QuestionsForm />
-
-        {queryConferenceResult?.loading &&
-          <Box alignSelf='center' marginTop={5}>
-            <CircularProgress color="secondary" />
-          </Box>
-        }
-      
+        <QuestionsForm questions={queryConferenceResult.data?.ConferenceReadModel?.questions || []} />
         <Box className={classes.list}>
-          <QuestionsList questions={queryConferenceResult.data?.ConferenceReadModel?.questions || []}/>
+          <QuestionsList loading={queryConferenceResult?.loading} questions={queryConferenceResult.data?.ConferenceReadModel?.questions || []}/>
         </Box>
       </Box>
     </Box>

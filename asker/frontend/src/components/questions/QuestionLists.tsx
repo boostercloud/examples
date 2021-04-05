@@ -1,10 +1,13 @@
-import { Box, makeStyles, Typography, Tooltip, Avatar, Divider, IconButton } from '@material-ui/core';
+import { Box, makeStyles, Typography, Tooltip, Avatar, Divider, IconButton, CircularProgress } from '@material-ui/core';
 import React, { useState, forwardRef, ForwardedRef } from 'react';
 import { getInitials, colors } from '../../common/helpers';
 import { useMutation } from '@apollo/client';
 import { CLAP_QUESTION } from '../../common/graphql-queries';
 import FlipMove from 'react-flip-move';
 import moment from 'moment';
+import { FavoriteBorder, Favorite } from '@material-ui/icons'
+import Alert from '@material-ui/lab/Alert';
+import { Question } from '../../common/types';
 
 const useStyles = makeStyles(theme => ({
   postedBy: {
@@ -22,17 +25,11 @@ const useStyles = makeStyles(theme => ({
   },
   questionTitle: {
     marginTop: 50,
-  }
+  },
+  heartColor: {
+    color: '#f44336'
+  },
 }))
-
-type Question = {
-  id: string
-  conferenceId: string
-  questioner: string
-  text: string
-  claps: number
-  createdAt: string
-}
 
 type QuestionItemProps = {
   question: Question
@@ -53,7 +50,7 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
 
     Clap({
       variables: {
-        byWhom: localStorage.getItem('email'),
+        byWhom: localStorage.getItem('userName'),
         questionId: question.id
       }
     }).then(() => console.log('Creating')).catch(e => console.log(e))
@@ -76,9 +73,9 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
           </Box>
           <Box paddingRight={2} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
             <IconButton aria-label="delete" onClick={onCountChange}>
-              👏
+              {question.claps === 0 ? <FavoriteBorder className={classes.heartColor} /> : <Favorite className={classes.heartColor} />}
             </IconButton>
-            {question.claps > 0 && <Typography color='secondary' className={classes.postedAt}>
+            {question.claps > 0 && <Typography style={{ color: '#f44336' }} className={classes.postedAt}>
               {question.claps}
             </Typography>}
           </Box>
@@ -96,16 +93,31 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
 
 type QuestionListProps = {
   questions: Question[]
+  loading: boolean
 }
 
 export const QuestionsList = (props: QuestionListProps) => {
-  const { questions } = props;
+  const { questions, loading } = props;
   const classes = useStyles()
 
+
+  if (loading) {
+    return (
+      <Box textAlign='center' marginTop={4}>
+        <CircularProgress color="secondary" />
+      </Box>
+    )
+  }
+
   return (<>
-    <Typography className={classes.questionTitle} variant='h6' color='secondary'>
-      Questions:
-    </Typography>
+    { questions?.length > 0 ?
+      (<Typography className={classes.questionTitle} variant='h6' color='secondary'>
+        Questions:
+      </Typography>)
+      : (<Box marginTop={4}>
+        <Alert severity="info">No questions has been found. Post your first one!</Alert>
+      </Box>)
+    }
     <FlipMove>
       {questions.map((item, index) => {
         return <QuestionItem key={item.id} question={item} index={index} />
