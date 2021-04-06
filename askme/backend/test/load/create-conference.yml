@@ -1,0 +1,18 @@
+config:
+  target: https://5p3g3mjzm5.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  plugins:
+    expect: {}
+  phases:
+    - duration: 1
+      arrivalCount: 1
+  variables:
+    conferenceName: serverless_conf
+scenarios:
+  - name: Create a conference for the load testing
+    flow:
+      - post:
+          url: /
+          body: '{ "query":"mutation { CreateConference(input: { location: \"Canary
+            Islands\", name: \"{{conferenceName}}\" }) }" }'
+          expect:
+            - notHasProperty: errors

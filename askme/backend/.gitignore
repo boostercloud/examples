@@ -11,3 +11,4 @@ coverage
 .booster
 .deploy
 .env
+.serverless

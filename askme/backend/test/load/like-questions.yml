@@ -1,0 +1,23 @@
+config:
+  target: https://5p3g3mjzm5.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  plugins:
+    expect: {}
+  phases:
+    - duration: 20
+      arrivalRate: 500
+      name: Liking questions
+  variables:
+    conferenceName: serverless_conf
+  payload:
+    path: ./questions.csv
+    fields:
+      - questionId
+      - existentialQuestion
+scenarios:
+  - name: Clapping questions
+    flow:
+      - post:
+          name: Clapping the question
+          url: /
+          body: '{ "query":"mutation { Like(input:{ questionId: \"{{questionId}}\",
+            byWhom: \"Bryan Bednarek\" }) }" }'
