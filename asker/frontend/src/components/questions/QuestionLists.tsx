@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography, Tooltip, Avatar, Divider, IconButton, CircularProgress } from '@material-ui/core';
-import React, { useState, forwardRef, ForwardedRef } from 'react';
+import React, { useState, forwardRef, ForwardedRef, useEffect } from 'react';
 import { getInitials, colors } from '../../common/helpers';
 import { useMutation } from '@apollo/client';
 import { CLAP_QUESTION } from '../../common/graphql-queries';
@@ -40,6 +40,10 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
   const classes = useStyles()
   const [question, setQuestion] = useState(props.question)
 
+  useEffect(() => {
+    setQuestion(props.question)
+  }, [props.question])
+
   const [Clap] = useMutation(CLAP_QUESTION);
 
   const onCountChange = () => {
@@ -58,7 +62,7 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
 
   return (
     <div ref={ref}>
-      <Box key={question.id} mt={4} mb={4}>
+      <Box mt={4} mb={4}>
         <Box display='flex' alignItems='center'>
           <Tooltip title={question.questioner} aria-label='add'>
             <Avatar style={{ backgroundColor: colors[0] }}>{getInitials(question.questioner)}</Avatar>
