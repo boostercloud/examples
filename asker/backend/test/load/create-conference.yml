@@ -6,7 +6,7 @@ config:
     - duration: 1
       arrivalCount: 1
   variables:
-    conferenceName: load-test-7
+    conferenceName: serverless_conf
 scenarios:
   - name: Create a conference for the load testing
     flow:

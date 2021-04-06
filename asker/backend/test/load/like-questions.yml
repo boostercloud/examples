@@ -3,24 +3,21 @@ config:
   plugins:
     expect: {}
   phases:
-    - duration: 2
-      arrivalRate: 1000
-      name: Clapping questions
+    - duration: 20
+      arrivalRate: 500
+      name: Liking questions
   variables:
-    conferenceName: load-test-7
+    conferenceName: serverless_conf
   payload:
-    path: "./questions.csv"
+    path: ./questions.csv
     fields:
-      - "questionId"
-      - "existentialQuestion"
-    skipHeader: true
+      - questionId
+      - existentialQuestion
 scenarios:
   - name: Clapping questions
     flow:
       - post:
           name: Clapping the question
           url: /
-          body: '{ "query":"mutation { Clap(input:{ questionId: \"{{questionId}}\",
+          body: '{ "query":"mutation { Like(input:{ questionId: \"{{questionId}}\",
             byWhom: \"Bryan Bednarek\" }) }" }'
-          expect:
-            - notHasProperty: errors

@@ -1,0 +1,25 @@
+config:
+  target: https://5p3g3mjzm5.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  plugins:
+    expect: {}
+  phases:
+    - duration: 2
+      arrivalCount: 100
+  variables:
+    conferenceName: serverless_conf
+  payload:
+    path: ./questions.csv
+    fields:
+      - questionId
+      - existentialQuestion
+    order: sequence
+scenarios:
+  - name: Asking questions
+    flow:
+      - post:
+          url: /
+          body: '{ "query":"mutation { Ask(input: { conference:\"{{conferenceName}}\"
+            question:\"{{existentialQuestion}}\" questionId:\"{{questionId}}\"
+            who:\"alvaro@booster.cloud\" }) }" }'
+          expect:
+            - notHasProperty: errors

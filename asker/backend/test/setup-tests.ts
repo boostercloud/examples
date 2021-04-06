@@ -20,7 +20,13 @@ if (!args.target || !args.conference) {
   )
 }
 
-fs.readdirSync(loadTestsFolder).forEach(modifyTargetAndConference)
+fs.readdirSync(loadTestsFolder)
+  .filter(yamlFile)
+  .forEach(modifyTargetAndConference)
+
+function yamlFile(fileName: string): boolean {
+  return fileName.endsWith('.yml')
+}
 
 function modifyTargetAndConference(fileName: string): void {
   const filePath = path.join(loadTestsFolder, fileName)
