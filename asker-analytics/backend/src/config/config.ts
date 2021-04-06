@@ -6,6 +6,7 @@ require('dotenv').config()
 
 Booster.configure('on-aws', (config: BoosterConfig): void => {
   config.appName = 'askme-analytics'
+  config.assets = ['.env']
   config.provider = Provider([
     {
       packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
