@@ -12,11 +12,7 @@ export class Question {
     readonly questioner: string,
     readonly text: string,
     readonly likes: number,
-<<<<<<< HEAD:asker/backend/src/entities/question.ts
     readonly createdAt: string
-=======
-    readonly createdAt: string,
->>>>>>> changed claps by likes:askme/backend/src/entities/question.ts
   ) {}
 
   @Reduces(QuestionAsked)
@@ -35,11 +31,7 @@ export class Question {
   @Reduces(QuestionLiked)
   public static reduceQuestionLiked(event: QuestionLiked, currentQuestion?: Question): Question {
     if (!currentQuestion) {
-<<<<<<< HEAD:asker/backend/src/entities/question.ts
       throw new Error('Someone liked a question that does not exist')
-=======
-      throw new Error('Someone set a like on a question that does not exist')
->>>>>>> changed claps by likes:askme/backend/src/entities/question.ts
     }
     return new Question(
       currentQuestion.id,
