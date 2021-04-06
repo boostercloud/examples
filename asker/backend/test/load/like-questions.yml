@@ -1,0 +1,28 @@
+config:
+  target: https://5p3g3mjzm5.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  plugins:
+    expect: {}
+  phases:
+    - duration: 2
+      arrivalRate: 1000
+      name: Clapping questions
+  variables:
+    conferenceName: load-test-7
+scenarios:
+  - name: Clapping questions
+    flow:
+      - post:
+          name: Selecting one question randomly
+          url: /
+          body: '{ "query":"query { ConferenceReadModel(id:\"{{conferenceName}}\") {
+            questions } }" }'
+          capture:
+            json: $.data.ConferenceReadModel.questions[*].id
+            as: questionId
+      - post:
+          name: Clapping the question
+          url: /
+          body: '{ "query":"mutation { Clap(input:{ questionId: \"{{questionId}}\",
+            byWhom: \"Bryan Bednarek\" }) }" }'
+          expect:
+            - notHasProperty: errors
