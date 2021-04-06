@@ -7,7 +7,12 @@ import { QuestionAsked } from '../events/question-asked'
   authorize: 'all',
 })
 export class Ask {
-  public constructor(readonly who: string, readonly question: string, readonly conference: UUID) {}
+  public constructor(
+    readonly who: string,
+    readonly question: string,
+    readonly conference: UUID,
+    readonly questionId: UUID
+  ) {}
 
   public static async handle(command: Ask, register: Register): Promise<void> {
     if (!command.who) {
@@ -22,8 +27,10 @@ export class Ask {
         `There are no registered conferences called ${command.conference}. Please, ask questions in an existing conference`
       )
     }
+
+    const questionId = command.questionId ?? UUID.generate()
     register.events(
-      new QuestionAsked(UUID.generate(), new Date().toISOString(), command.who, command.conference, command.question)
+      new QuestionAsked(questionId, new Date().toISOString(), command.who, command.conference, command.question)
     )
   }
 }

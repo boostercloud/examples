@@ -1,7 +1,7 @@
 import { Entity, Reduces } from '@boostercloud/framework-core'
 import { UUID } from '@boostercloud/framework-types'
 import { QuestionAsked } from '../events/question-asked'
-import { QuestionClapped } from '../events/question-clapped'
+import { QuestionLiked } from '../events/question-liked'
 
 @Entity
 export class Question {
@@ -11,19 +11,27 @@ export class Question {
     readonly conferenceId: UUID,
     readonly questioner: string,
     readonly text: string,
-    readonly claps: number,
-    readonly createdAt: string,
+    readonly likes: number,
+    readonly createdAt: string
   ) {}
 
   @Reduces(QuestionAsked)
   public static reduceQuestionAsked(event: QuestionAsked): Question {
-    return new Question(event.questionId, event.when, event.conference, event.questioner, event.text, 0, new Date().toISOString())
+    return new Question(
+      event.questionId,
+      event.when,
+      event.conference,
+      event.questioner,
+      event.text,
+      0,
+      new Date().toISOString()
+    )
   }
 
-  @Reduces(QuestionClapped)
-  public static reduceQuestionClapped(event: QuestionClapped, currentQuestion?: Question): Question {
+  @Reduces(QuestionLiked)
+  public static reduceQuestionLiked(event: QuestionLiked, currentQuestion?: Question): Question {
     if (!currentQuestion) {
-      throw new Error('Someone clapped a question that does not exist')
+      throw new Error('Someone liked a question that does not exist')
     }
     return new Question(
       currentQuestion.id,
@@ -31,7 +39,7 @@ export class Question {
       currentQuestion.conferenceId,
       currentQuestion.questioner,
       currentQuestion.text,
-      currentQuestion.claps + 1,
+      currentQuestion.likes + 1,
       currentQuestion.createdAt
     )
   }

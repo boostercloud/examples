@@ -8,17 +8,15 @@ config:
       name: Clapping questions
   variables:
     conferenceName: load-test-7
+  payload:
+    path: "./questions.csv"
+    fields:
+      - "questionId"
+      - "existentialQuestion"
+    skipHeader: true
 scenarios:
   - name: Clapping questions
     flow:
-      - post:
-          name: Selecting one question randomly
-          url: /
-          body: '{ "query":"query { ConferenceReadModel(id:\"{{conferenceName}}\") {
-            questions } }" }'
-          capture:
-            json: $.data.ConferenceReadModel.questions[*].id
-            as: questionId
       - post:
           name: Clapping the question
           url: /

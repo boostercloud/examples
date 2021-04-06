@@ -7,57 +7,19 @@ config:
       arrivalCount: 100
   variables:
     conferenceName: load-test-7
-    existentialQuestions:
-      - What marks the end of life? Is it death or is it when no one is left to
-        remember us?
-      - Are there resources that answer the questions I am having? If not, is it
-        okay that there is not an answer?
-      - What is an activity I have done that has made me feel the most alive?
-      - Can I repeat that activity now or soon?
-      - How can I change my perspective?
-      - How can I make my existential crisis a positive experience?
-      - How can I be more deliberate in my questioning?
-      - Why is this moment occurring now?
-      - What would I tell my younger self if I were experiencing this years ago?
-      - If you expect the unexpected, does that make the unexpected expected?
-      - Is it immoral for a vegetarian to eat animal crackers?
-      - Is a hotdog a sandwich?
-      - Why isn't it dangerous for a walk-in restaurant to have a drive-in
-        window?
-      - If I hit you with a dictionary, is that verbal abuse or physical assault?
-      - They say exercising for an hour a day adds an extra hour to your life,
-        but are you really adding anything if you spent that extra hour
-        exercising?
-      - If it’s bad to be at the right place at the wrong time, is it good to be
-        in the wrong place at the right time?
-      - If you draw a white circle on a white piece of paper, does the circle
-        exist?
-      - If quitters can’t win and winners never quit, why would we tell someone
-        to quit while they're ahead?
-      - Before we had sliced bread, what did we consider the first best thing?
-      - If animals have consciousness, do birds consciously choose who to poop
-        on?
-      - Is it possible to be standing backward on a staircase?
-      - If everyone thinks life isn’t fair, is it fair to say that life is in
-        fact… fair?
-      - If you purposely fail, did you succeed?
-      - Who let the dogs out? Who? Who, who, who?
-      - Are your successes your own, or are they the culmination of what others
-        have given you?
-      - Given the chance, would you want to know how your life will end and when
-        it will happen?
-      - How would knowing when you are going to die affect how you live your
-        life?
-      - Is it better to expand your knowledge or deepen it?
-      - Can your existence be replaced?
-      - Are there any upsetting truths that you have been ignoring?
+  payload:
+    path: "./questions.csv"
+    fields:
+      - "questionId"
+      - "existentialQuestion"
+    skipHeader: true
 scenarios:
   - name: Create a conference for the load testing
     flow:
       - post:
           url: /
           body: '{ "query":"mutation { Ask(input: { conference:\"{{conferenceName}}\"
-            question:\"{{existentialQuestions}}\" who:\"alvaro@booster.cloud\"
+            question:\"{{existentialQuestion}}\" questionId:\"{{questionId}}\" who:\"alvaro@booster.cloud\"
             }) }" }'
           expect:
             - notHasProperty: errors
