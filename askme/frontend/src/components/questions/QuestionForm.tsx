@@ -11,16 +11,16 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 const useStyles = makeStyles(theme => ({
   textInput: {
     marginBottom: 20,
-    marginTop: 30,
+    marginTop: 10,
   },
   submit: {
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 10,
   },
   logo: {
     fontFamily: 'Pacifico',
     fontStyle: 'cursive',
-    paddingBottom: 50,
+    paddingBottom: 25,
     textAlign: 'center',
     fontSize: '80px'
   },
@@ -70,7 +70,7 @@ export const QuestionsForm = (props: QuestionsFormProps) => {
       </Typography>
       <Box display='flex' flexDirection='row'>
         <Box display='flex' flexDirection='column' flexGrow='1' >
-          <Typography variant='h4' color='secondary'>
+          <Typography variant='h6' color='secondary'>
             Conference: {localStorage.getItem('conference')}
           </Typography>
           <Typography variant='h6' color='secondary'>
@@ -96,7 +96,7 @@ export const QuestionsForm = (props: QuestionsFormProps) => {
           </Tooltip>
         </Box>
       </Box>
-      <Box display='flex' flexDirection='column' style={{ backgroundColor: '#f0f0f0', marginTop: 32, borderRadius: 6, padding: 16 }}>
+      <Box display='flex' flexDirection='column' style={{ backgroundColor: '#f0f0f0', marginTop: 32, borderRadius: 6, paddingLeft: 16, paddingRight: 16, paddingTop: 0, paddingBottom: 16 }}>
         <TextField
           className={classes.textInput}
           inputMode='url'

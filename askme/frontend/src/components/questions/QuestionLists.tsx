@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     fontStyle: 'light',
-    fontSize: 26,
+    fontSize: 18,
     fontWeight: 100,
   },
   questionTitle: {
@@ -62,7 +62,7 @@ const QuestionItem = forwardRef((props: QuestionItemProps, ref: ForwardedRef<HTM
 
   return (
     <div ref={ref}>
-      <Box mt={4} mb={4}>
+      <Box mt={1} mb={2}>
         <Box display='flex' alignItems='center'>
           <Tooltip title={question.questioner} aria-label='add'>
             <Avatar style={{ backgroundColor: colors[0] }}>{getInitials(question.questioner)}</Avatar>
