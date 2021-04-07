@@ -2,14 +2,28 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import { shadows } from '@material-ui/system';
 
-import './App.css';
-
-interface AppProps {}
 
 import { Bar } from 'react-chartjs-2';
 import * as M from '@material-ui/core';
 import Selector from './Selector';
 import { gql, useQuery, useSubscription } from '@apollo/client';
+import { makeStyles } from '@material-ui/core';
+
+
+const useStyles = makeStyles(theme => ({
+  logo: {
+    fontFamily: 'Pacifico',
+    fontStyle: 'cursive',
+    paddingTop: 10,
+    paddingLeft: 20,
+    fontSize: '40px'
+  },
+  button: {
+    marginRight: 5
+  }
+}))
+
+
 
 const dataViewModel = (dataset: Record<string, number>, limit?: number) => {
   return {
@@ -71,7 +85,8 @@ const CONFERENCE_STATS_SUBSCRIPTION = gql`
   }
 `;
 
-const VerticalBar = () => {
+const App = () => {
+  const classes = useStyles()
   const [conferenceId, setConferenceId] = useState('');
   const [data, setData] = useState(
     {} as Record<WordCategory, Record<string, number>>,
@@ -111,15 +126,18 @@ const VerticalBar = () => {
   useEffect(() => {
     setDataset(sortDataset(data[selectedCategory]));
   }, [selectedCategory, data]);
+
   return (
-    <div id="app">
-      <M.Container>
+    <M.Container>
+      <M.Box mt={10} display='flex' flexDirection='row' justifyItems='center' alignItems='center'>
         <M.Card elevation={3}>
           <M.CardContent>
             <M.Container>
               <M.Grid container>
                 <M.Grid item xs={9}>
-                  <h1 className="title">Askme Analytics</h1>
+                  <M.Typography variant='h2' color='primary' className={classes.logo}>
+                    ask.me analytics
+                    </M.Typography>
                 </M.Grid>
                 <M.Grid container item justify="flex-end" xs={3}>
                   <M.TextField
@@ -130,51 +148,56 @@ const VerticalBar = () => {
                   />
                 </M.Grid>
                 <M.Grid item xs={12}>
+                  <M.Box mt={5}>
                   <Bar
                     data={dataViewModel(dataset, shownElements)}
                     options={options}
                   />
+                  </M.Box>
                 </M.Grid>
-                <M.Grid item container justify="space-around" xs={5}>
-                  <Selector
-                    currentSelection={selectedCategory}
-                    setSelection={setSelectedCategory}
-                    options={['allWords', 'nouns', 'verbs', 'adjectives']}
-                  ></Selector>
-                </M.Grid>
-                <M.Grid item xs={5}></M.Grid>
-                <M.Grid xs={2} item container justify="space-around">
-                  <M.Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setShownElements(Math.max(1, shownElements - 1));
-                    }}
-                  >
-                    -
-                  </M.Button>
-                  <M.Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setShownElements(
-                        Math.min(
-                          Object.keys(dataset).length,
-                          shownElements + 1,
-                        ),
-                      );
-                    }}
-                  >
-                    +
-                  </M.Button>
+
+                <M.Grid item xs={12}>
+                  <M.Box mt={5} display='flex' flexDirection='row'>
+                    <M.Box display='flex' flexDirection='row' flexWrap='no-wrap' flexGrow='1'>
+                      <Selector
+                        currentSelection={selectedCategory}
+                        setSelection={setSelectedCategory}
+                        options={['allWords', 'nouns', 'verbs', 'adjectives']}
+                      />
+                    </M.Box>
+                    <M.Box display='flex' flexDirection='row'>
+                      <M.Button
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          setShownElements(Math.max(1, shownElements - 1));
+                        }}>
+                      -
+                      </M.Button>
+                      <M.Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          setShownElements(
+                            Math.min(
+                              Object.keys(dataset).length,
+                              shownElements + 1,
+                            ),
+                          );
+                        }}>
+                        +
+                      </M.Button>
+                    </M.Box>
+                  </M.Box>
                 </M.Grid>
               </M.Grid>
             </M.Container>
           </M.CardContent>
         </M.Card>
-      </M.Container>
-    </div>
+      </M.Box>
+    </M.Container>
   );
 };
 
-export default VerticalBar;
+export default App;

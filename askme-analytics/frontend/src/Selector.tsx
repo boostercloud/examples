@@ -15,6 +15,7 @@ function SelectionButton<TOption extends string>(
     props.currentSelection === props.children ? 'contained' : 'outlined';
   return (
     <M.Button
+      style={{ marginRight: 5 }}
       variant={variant}
       color="secondary"
       onClick={() => props.setSelection(props.children)}
