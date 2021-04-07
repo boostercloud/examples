@@ -2,9 +2,9 @@ config:
   target: https://eld3ldmmu9.execute-api.us-east-1.amazonaws.com/on-aws/graphql
   phases:
     - duration: 30
-      arrivalRate: 1500
+      arrivalRate: 2000
   variables:
-    conferenceName: load_test2
+    conferenceName: booster_conf
   payload:
     path: ./questions.csv
     fields:
@@ -18,3 +18,7 @@ scenarios:
           url: /
           body: '{ "query":"mutation { Like(input:{ questionId: \"{{questionId}}\",
             byWhom: \"Bryan Bednarek\" }) }" }'
+          capture:
+            json: "$"
+            as: "response"
+      - log: "Response: {{response}}"
