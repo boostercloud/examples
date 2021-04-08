@@ -12,6 +12,7 @@ import {
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 
 console.log(import.meta.env.SNOWPACK_PUBLIC_WS_URL);
 
@@ -43,12 +44,31 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundImage: 'linear-gradient(to right top, #3f51b5, #006CC6, #0080C5, #0091B5, #009E9D)',
+          height: '100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        },
+      },
+    },
+  },
+});
+
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-  </React.StrictMode>,
+  </ThemeProvider>,
   document.getElementById('root'),
 );
 

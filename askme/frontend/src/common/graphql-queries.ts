@@ -36,3 +36,18 @@ export const LIKE_QUESTION = gql`
     Like(input:  { questionId: $questionId, byWhom: $byWhom })
   }
 `;
+
+
+export const GET_QUESTIONS = gql`
+  query QuestionReadModels {
+    QuestionReadModels {
+      id
+      askedOn
+      conferenceId
+      questioner
+      text
+      likes
+      createdAt
+    }
+  }
+`;
