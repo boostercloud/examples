@@ -4,8 +4,8 @@ import { Provider } from '@boostercloud/framework-provider-aws'
 
 require('dotenv').config()
 
-Booster.configure('on-aws', (config: BoosterConfig): void => {
-  config.appName = 'askme-analytics'
+Booster.configure('on-aws-prod', (config: BoosterConfig): void => {
+  config.appName = 'askme-analytics-prod'
   config.assets = ['.env']
   config.provider = Provider([
     {

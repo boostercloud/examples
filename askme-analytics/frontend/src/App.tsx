@@ -125,8 +125,9 @@ const App = () => {
   );
   useEffect(() => {
     setDataset(sortDataset(data[selectedCategory]));
+    setShownElements(Math.min(Object.keys(data[selectedCategory] ?? {}).length, 50))
   }, [selectedCategory, data]);
-
+  
   return (
     <M.Container>
       <M.Box mt={10} display='flex' flexDirection='row' justifyItems='center' alignItems='center'>
@@ -164,30 +165,6 @@ const App = () => {
                         setSelection={setSelectedCategory}
                         options={['allWords', 'nouns', 'verbs', 'adjectives']}
                       />
-                    </M.Box>
-                    <M.Box display='flex' flexDirection='row'>
-                      <M.Button
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                          setShownElements(Math.max(1, shownElements - 1));
-                        }}>
-                      -
-                      </M.Button>
-                      <M.Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                          setShownElements(
-                            Math.min(
-                              Object.keys(dataset).length,
-                              shownElements + 1,
-                            ),
-                          );
-                        }}>
-                        +
-                      </M.Button>
                     </M.Box>
                   </M.Box>
                 </M.Grid>
