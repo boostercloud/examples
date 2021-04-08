@@ -1,12 +1,12 @@
 config:
-  target: https://5p3g3mjzm5.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  target: https://p2w8f2532c.execute-api.us-east-1.amazonaws.com/on-aws/graphql
   plugins:
     expect: {}
   phases:
     - duration: 2
-      arrivalCount: 100
+      arrivalCount: 200
   variables:
-    conferenceName: serverless_conf
+    conferenceName: booster_conf
   payload:
     path: ./questions.csv
     fields:

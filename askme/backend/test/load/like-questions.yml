@@ -1,8 +1,8 @@
 config:
-  target: https://eld3ldmmu9.execute-api.us-east-1.amazonaws.com/on-aws/graphql
+  target: https://p2w8f2532c.execute-api.us-east-1.amazonaws.com/on-aws/graphql
   phases:
-    - duration: 30
-      arrivalRate: 2000
+    - duration: 20
+      arrivalRate: 2500
   variables:
     conferenceName: booster_conf
   payload:
@@ -19,6 +19,6 @@ scenarios:
           body: '{ "query":"mutation { Like(input:{ questionId: \"{{questionId}}\",
             byWhom: \"Bryan Bednarek\" }) }" }'
           capture:
-            json: "$"
-            as: "response"
+            json: $
+            as: response
       - log: "Response: {{response}}"
