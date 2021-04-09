@@ -2,7 +2,7 @@
 import { Box, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import {  useQuery } from '@apollo/client';
-import {  GET_CONFERENCE, GET_QUESTIONS } from '../../common/graphql-queries';
+import {  GET_QUESTIONS } from '../../common/graphql-queries';
 import { QuestionsForm } from './QuestionForm';
 import { QuestionsList } from './QuestionLists';
 import { Question } from '../../common/types';
@@ -30,14 +30,6 @@ export const QuestionsView = () => {
   const classes = useStyles();
   const [questions, setQuestions] = useState<any[]>([])
 
-  
-  const queryConferenceResult = useQuery(GET_CONFERENCE, {
-    variables: {
-      id: localStorage.getItem('conference')
-    }, 
-    pollInterval: 500
-  });
-
   const byLikes = (questionA: Question, questionB: Question): number => {
     return questionB.likes - questionA.likes
   }
@@ -54,10 +46,8 @@ export const QuestionsView = () => {
   });
 
   useEffect(() => {
-    const conferenceQuestions = queryConferenceResult.data?.ConferenceReadModel?.questions || []
-    const globalQuestions = filterByConfAndSortByLikes()
-    setQuestions([...conferenceQuestions, ...globalQuestions])
-  }, [queryConferenceResult.data, questionsResult.data])
+    setQuestions(filterByConfAndSortByLikes())
+  }, [questionsResult.data])
 
   return (<Box className={classes.root}>
     <Box className={classes.wrapper}>
