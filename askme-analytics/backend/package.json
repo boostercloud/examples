@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@boostercloud/framework-provider-aws-infrastructure": "0.14.4",
-    "@boostercloud/rocket-kakfa-connector-aws-infrastructure": "1.0.1",
+    "@boostercloud/rocket-kafka-aws-infrastructure": "1.0.0",
     "@types/node": "^13.5.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",

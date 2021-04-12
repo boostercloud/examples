@@ -9,7 +9,7 @@ Booster.configure('on-aws-prod', (config: BoosterConfig): void => {
   config.assets = ['.env']
   config.provider = Provider([
     {
-      packageName: '@boostercloud/rocket-kakfa-connector-aws-infrastructure',
+      packageName: '@boostercloud/rocket-kafka-aws-infrastructure',
       parameters: {
         consumerConfig: [
           {
