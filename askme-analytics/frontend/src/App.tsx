@@ -8,6 +8,7 @@ import * as M from '@material-ui/core';
 import Selector from './Selector';
 import { gql, useQuery, useSubscription } from '@apollo/client';
 import { makeStyles } from '@material-ui/core';
+import { client } from '.';
 
 
 const useStyles = makeStyles(theme => ({
@@ -92,26 +93,11 @@ const App = () => {
     {} as Record<WordCategory, Record<string, number>>,
   );
   const [dataset, setDataset] = useState({} as Record<string, number>);
+  const [subscriptions, setSubscriptions] = useState([] as any[])
   const {
-    loading: queryLoading,
-    error: queryError,
-    data: queryData,
+    refetch
   } = useQuery(CONFERENCE_STATS_QUERY, {
     onCompleted: (data) => {
-      if (!data.ConferenceStatistic) return;
-      setData(data['ConferenceStatistic']);
-    },
-    variables: {
-      id: conferenceId,
-    },
-  });
-  const {
-    loading: subLoading,
-    error: subError,
-    data: subData,
-  } = useSubscription(CONFERENCE_STATS_SUBSCRIPTION, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      const data = subscriptionData.data;
       if (!data.ConferenceStatistic) return;
       setData(data['ConferenceStatistic']);
     },
@@ -128,6 +114,34 @@ const App = () => {
     setShownElements(Math.min(Object.keys(data[selectedCategory] ?? {}).length, 50))
   }, [selectedCategory, data]);
   
+  useEffect(() => {
+    if (conferenceId) {    
+      subscriptions.forEach(subs => subs.unsubscribe())
+
+      refetch()
+      
+      const observer = client.subscribe({
+        query: CONFERENCE_STATS_SUBSCRIPTION,
+        variables: {
+          id: conferenceId,
+        },
+      })
+
+      const subscription = observer.subscribe(({ data }) => {
+        if (!data.ConferenceStatistic) {
+          setData({} as Record<WordCategory, Record<string, number>>);
+        }
+        setData(data['ConferenceStatistic']);
+      })
+
+      setSubscriptions([...subscriptions, subscription])
+
+      return () => subscription.unsubscribe()
+    } else {
+      setData({} as Record<WordCategory, Record<string, number>>);
+    }
+  }, [conferenceId])
+
   return (
     <M.Container>
       <M.Box mt={10} display='flex' flexDirection='row' justifyItems='center' alignItems='center'>
