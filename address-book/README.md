@@ -1,13 +1,13 @@
-##Very simple address book built with Booster
+## Very simple address book built with Booster
 
 Read the [accompanying article](https://dev.to/boostercloud/understanding-event-sourcing-using-the-booster-framework-2da3-temp-slug-3717947?preview=b971bfd515f79d01ad8e9f7259ba366f35c0fbdf59e87a864c29c25f738086422bcb7d26853b98d46a1bc64939758a4156d905543ce73ef4b473bc0d).
 
-###Requirements
+### Requirements
 
 * Node.js `v12` or later
 * An AWS account
 
-###Running the app
+### Running the app
 
 1. If you don't have it installed, install the Booster CLI with NPM:
 
@@ -37,7 +37,7 @@ queries or mutations (you can use something like [Hoppscotch](https://hoppscotch
     boost nuke -e production
     ```
    
-###Example queries and mutations
+### Example queries and mutations
 
 1. Add a new contact:
 
