@@ -17,6 +17,7 @@ Booster.configure('on-aws-prod', (config: BoosterConfig): void => {
             mappingOptions: [
               {
                 topicEntityId: 'conferenceId',
+                topicEventTypeName: 'QuestionAsked',
                 entityTypeName: 'Conference',
                 eventTypeName: 'QuestionAsked',
                 fields: {
