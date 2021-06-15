@@ -13,7 +13,7 @@ Booster.configure('on-aws-prod', (config: BoosterConfig): void => {
       parameters: {
         consumerConfig: [
           {
-            topicName: 'askme-questions-asked',
+            topicName: 'askme-optum',
             mappingOptions: [
               {
                 topicEntityId: 'conferenceId',
