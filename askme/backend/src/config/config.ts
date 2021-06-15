@@ -21,7 +21,7 @@ Booster.configure('on-azure', (config: BoosterConfig): void => {
 })
 
 Booster.configure('on-aws-with-kafka-prod', (config: BoosterConfig): void => {
-  config.appName = `${process.env.appName}-kafka-prod` ?? 'askme-with-kafka'
+  config.appName = `${process.env.appName}-kafka` ?? 'askme-with-kafka'
   config.assets = ['.env']
   config.provider = ProviderAWS([
     {
@@ -30,7 +30,7 @@ Booster.configure('on-aws-with-kafka-prod', (config: BoosterConfig): void => {
         consumerConfig: [],
         producerConfig: [
           {
-            topicName: 'askme-questions-asked',
+            topicName: 'askme-optum',
             eventTypeName: 'QuestionAsked',
             fields: {
               questionId: 'questionId',
