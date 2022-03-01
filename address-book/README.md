@@ -1,6 +1,6 @@
 ## Very simple address book built with Booster
 
-Read the [accompanying article](https://dev.to/boostercloud/understanding-event-sourcing-using-the-booster-framework-2da3-temp-slug-3717947?preview=b971bfd515f79d01ad8e9f7259ba366f35c0fbdf59e87a864c29c25f738086422bcb7d26853b98d46a1bc64939758a4156d905543ce73ef4b473bc0d).
+Read the [accompanying article](https://dev.to/boostercloud/understanding-event-sourcing-using-the-booster-framework-2n59).
 
 ### Requirements
 
