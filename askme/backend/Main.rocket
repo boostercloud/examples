@@ -1,0 +1,46 @@
+define "AskMe" do
+  use appInfo with
+    name = "askme"
+
+  use assets with
+    files = [".env"]
+
+  use booster with
+    app = "./dist/index.js"
+
+  command "ls" do
+    shell "ls -la"
+
+  environment "on-aws-with-kafka-prod" do
+    use aws
+
+    use kafka with
+      source = github "boostercloud/rocket-kafka-aws-infrastructure"
+      producerConfig = [
+        object with
+          topicName = "askme"
+          eventTypeName = "QuestionAsked"
+          fields = object with
+            questionId = "questionId"
+            conference = "conference"
+            text = "text"
+      ]
+      bootstrapServers = env "bootstrapServers"
+      secretArn = env "secretArn"
+
+  environment "dev" do
+    use local
+
+  environment "on-aws" do
+    use aws
+    use logger with
+      level = "error"
+
+  environment "on-k8s-aws" do
+    use kubernetes
+
+  environment "on-k8s-gcp" do
+    use kubernetes
+
+  environment "on-k8s-azure" do
+    use kubernetes
